@@ -132,6 +132,13 @@ Katalog `modeleBC/` zawiera dedykowane modele 3D postaci frakcyjnych oraz kluczo
 - `wieza.glb` – Wieża / Podstawa wieży (Rook)
 - `wiking.glb` – Wikingowie z krwawego fiordu
 - `zakon.glb` – Zakon
+- `korona.glb` – Korona / Atrybut królewski (King & Queen)
+
+> [!NOTE]
+> **Wykorzystanie korony (`korona.glb`) w armii:**  
+> W obrębie danej armii model korony jest wykorzystywany **dwukrotnie** z odpowiednim skalowaniem w silniku gry:
+> - **Dla Króla (King):** wersja większa (skalowanie standardowe / powiększone, np. 1.15x - 1.20x),
+> - **Dla Hetmana / Królowej (Queen):** wersja mniejsza (skalowanie pomniejszone, np. 0.85x - 0.90x).
 
 ---
 

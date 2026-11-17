@@ -61,12 +61,13 @@ Plik był w 100% kompletnym, nieuszkodzonym modelem GLB, który z przyczyn syste
 
 ---
 
-### 3. Rozszerzenie o kluczowe figury szachowe: Koń i Wieża
-Kolejnym krokiem twórcy było dostarczenie dedykowanych modeli kluczowych figur bitewnych:
+### 3. Rozszerzenie o kluczowe figury i regalia: Koń, Wieża i Korona
+Kolejnym krokiem twórcy było dostarczenie dedykowanych modeli kluczowych figur bitewnych oraz regaliów:
 - `kon.glb` (12.4 MB) – model konia / skoczka szachowego,
-- `wieza.glb` (15.7 MB) – model wieży / podstawy pod wieżę.
+- `wieza.glb` (15.7 MB) – model wieży / podstawy pod wieżę,
+- `korona.glb` (16.8 MB) – model korony królewskiej. Zgodnie z wytycznymi twórcy, korona jest współdzielonym zasobem regaliów w armii i w silniku gry wykorzystywana jest dwukrotnie: w wersji większej (dla Króla) oraz mniejszej (dla Hetmana / Królowej).
 
-Agent natychmiast zweryfikował sumy kontrolne i nagłówki glTF 2.0 obu plików, po czym zintegrował je ze strukturą `modeleBC/` i zaktualizował dokumentację projektu.
+Agent natychmiast zweryfikował sumy kontrolne i nagłówki glTF 2.0 wszystkich plików, po czym zintegrował je ze strukturą `modeleBC/` i zaktualizował dokumentację projektu.
 
 ---
 
