@@ -44,5 +44,22 @@ Zbudowano standard scenariusza `.md`, który zawiera:
 
 ---
 
+## Wpis 2: Dedykowane modele frakcyjne GLB i detektywistyczna naprawa assetu (.tmp -> .glb)
+
+### 1. Nowa partia assetów (`modeleBC`)
+Użytkownik dostarczył katalog `modeleBC` zawierający dedykowane modele postaci stworzone specjalnie pod unikalne cechy każdej z 10 frakcji. W przeciwieństwie do ogólnych modeli z bazy `FBX/`, te modele reprezentują docelowy styl wizualny gry w nowoczesnym formacie binarnym glTF 2.0 (`.glb`).
+
+### 2. Autonomiczna diagnoza binarnego uszkodzenia
+W paczce pojawił się nietypowy plik: `kowboj.tmp` o wadze 8.3 MB, podczas gdy pozostałe pliki miały rozszerzenie `.glb`.
+Zamiast przerwać pracę pytaniem do użytkownika, agent przeprowadził inspekcję binarną nagłówka:
+- Magiczne bajty: `0x46546C67` (`glTF` w ASCII).
+- Wersja: `2` (glTF 2.0).
+- Zadeklarowany `HeaderLength`: `8 304 256` bajtów.
+- Rzeczywisty rozmiar pliku na dysku: dokładnie `8 304 256` bajtów.
+
+Plik był w 100% kompletnym, nieuszkodzonym modelem GLB, który z przyczyn systemowych zachował rozszerzenie tymczasowe pobierania. Agent automatycznie nadał mu poprawną nazwę `kowboj.glb` i zweryfikował integralność wszystkich 10 modeli przed zasileniem repozytorium.
+
+---
+
 ### 3. Lekcja z vibecodingu
-> **Wniosek:** Vibecoding nie polega na pisaniu losowego kodu na chybił-trafił. To umiejętność błyskawicznego przekładania intuicji i surowych materiałów twórcy na żelazną, ustrukturyzowaną architekturę inżynieryjną, którą mogą skonsumować zarówno ludzie, jak i automatyczne pipeline'y deweloperskie.
+> **Wniosek:** Dojrzały asystent vibecodingu nie jest biernym wykonawcą poleceń typu „kopiuj-wklej”. Prawdziwa wartość pojawia się wtedy, gdy agent potrafi przeprowadzić inspekcję heksadecymalną nagłówków binarnych, wykryć anomalie w plikach i zabezpieczyć integralność projektu zanim jakikolwiek błąd trafi na produkcję.
