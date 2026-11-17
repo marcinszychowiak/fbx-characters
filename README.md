@@ -84,6 +84,22 @@ Katalog `Cutscenes/` zawiera materiały wideo (MP4) stanowiące referencje narra
 
 ---
 
+## Głosy frakcji (`BloodChess/`)
+
+Katalog `BloodChess/` zawiera linie dialogowe i kwestie głosowe (pliki audio `.wav`, jakość 48 kHz) podzielone według 10 frakcji:
+- **Horda** (5 plików)
+- **Klan Krwawego Cienia** (4 pliki)
+- **Korsarze** (4 pliki)
+- **Kowboj** (4 pliki)
+- **Najemnicy** (4 pliki)
+- **Rzeźnia** (`Rzeznia/`, 1 plik)
+- **Sabat Goblinów** (4 pliki)
+- **Syndykat** (4 pliki)
+- **Wikingowie z krwawego fiordu** (5 plików)
+- **Zakon** (4 pliki)
+
+---
+
 ## Zastosowanie
 - **Game Engine**: Unity, Unreal Engine 5, Godot Engine.
 - **DCC Tools**: Blender, Autodesk Maya, 3ds Max.
