@@ -142,6 +142,18 @@ Katalog `modeleBC/` zawiera dedykowane modele 3D postaci frakcyjnych oraz kluczo
 
 ---
 
+## Ścieżka dźwiękowa (`Soundtrack/`)
+
+Katalog `Soundtrack/` gromadzi utwory muzyczne (BGM) dla gry **BloodChess**:
+- [README.md (Instrukcja i architektura audio)](Soundtrack/README.md)
+- `Universal_Battle_Theme_01.mp3` – Główny, orkiestrowy motyw bitewny (4:04)
+
+> [!TIP]
+> **Mechanizm losowania muzyki meczu:**  
+> W trakcie partii ścieżka dźwiękowa wybierana jest losowo spośród utworów przypisanych do armii biorących udział w grze oraz **jednej z dwóch ścieżek uniwersalnych**. Katalog będzie sukcesywnie uzupełniany o kolejne utwory frakcyjne i uniwersalne.
+
+---
+
 ## Zastosowanie
 - **Game Engine**: Unity, Unreal Engine 5, Godot Engine.
 - **DCC Tools**: Blender, Autodesk Maya, 3ds Max.

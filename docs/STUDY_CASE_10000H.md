@@ -71,5 +71,19 @@ Agent natychmiast zweryfikował sumy kontrolne i nagłówki glTF 2.0 wszystkich 
 
 ---
 
+## Wpis 3: Dynamiczna orkiestracja bitwy — architektura systemu ścieżki dźwiękowej (`Soundtrack/`)
+
+### 1. Wizja muzyczna gry
+Szachy bitewne „BloodChess” wymagają oprawy muzycznej budującej napięcie i potęgującej powagę pojedynku. Twórca zdefiniował prostą, ale niezwykle elastyczną regułę:
+> *„ścieżka dźwiękowa wybierana jest losowo spośród tych przypisanych do armii biorących udział w grze oraz jednej z dwóch ścieżek uniwersalnych. Początkowo będzie tam tylko jedna ścieżka, ale w przyszłości będą dodawane kolejne.”*
+
+### 2. Projekt architektury audio w silniku
+Zamiast wrzucać plik muzyczny jako luźny asset, agent opracował kompletną specyfikację techniczną w `Soundtrack/README.md`:
+- Dynamiczny selector puli utworu (`MatchMusicPool`): silnik przy starcie meczu aggregeuje utwory Frakcji A, Frakcji B oraz uniwersalne motywy bitewne, losując podkład dla danej partii.
+- Zaimplementowano regułę audio duckingu (`-9 dB`), wyciszającą muzykę tła w trakcie odpalania brutalnych egzekucji cutscenkowych, by wyeksponować kwestie głosowe aktorów i mięsiste efekty SFX.
+- Dodano pierwszą uniwersalną ścieżkę bitewną (`Universal_Battle_Theme_01.mp3`, 4:04, 5.74 MB) – epicki orkiestrowy utwór z chórem i potężnymi bębnami.
+
+---
+
 ### 4. Lekcja z vibecodingu
 > **Wniosek:** Dojrzały asystent vibecodingu nie jest biernym wykonawcą poleceń typu „kopiuj-wklej”. Prawdziwa wartość pojawia się wtedy, gdy agent potrafi przeprowadzić inspekcję heksadecymalną nagłówków binarnych, wykryć anomalie w plikach i zabezpieczyć integralność projektu zanim jakikolwiek błąd trafi na produkcję.

@@ -19,19 +19,25 @@ Niniejszy dokument przedstawia w przystępny i zrozumiały sposób stos technolo
 - **Alternatywy:** Klasyczny FBX z osobnymi folderami tekstur (podatny na gubienie ścieżek bezwzględnych do materiałów), USDZ (format głównie ekosystemu Apple).
 - **Kryteria decyzyjne:** Zerowe ryzyko brakujących tekstur (self-contained asset), szybkie ładowanie w runtime silników nowej generacji i narzędzi webowych/silników gier, natywna obsługa materiałów PBR.
 
-### 2.3. Format Dźwięków: Nieskompresowany PCM WAV (48 kHz / 16-bit)
+### 2.3. Format Dźwięków Krótkich (Głosy i SFX): Nieskompresowany PCM WAV (48 kHz / 16-bit)
 - **Rola w projekcie:** Przechowywanie kwestii głosowych frakcji (`BloodChess/`) oraz próbek efektów dźwiękowych (SFX).
 - **Dlaczego WAV 48 kHz?** Częstotliwość 48 kHz jest standardem produkcyjnym w branży filmowej i w nowoczesnych grach wideo. Format nieskompresowany zapobiega degradacji jakości i artefaktom kompresji podczas wielokrotnego nakładania filtrów dźwiękowych i miksowania w silniku audio.
-- **Alternatywy:** MP3 (niezalecany w silnikach ze względu na opóźnienia dekompresji i obcięte pasmo wysokich tonów), OGG Vorbis (dobry format runtime, ale kompresję do OGG wykonuje bezpośrednio silnik gry przy budowaniu projektu).
-- **Kryteria decyzyjne:** Zachowanie studyjnej czystości głosu, brak opóźnień przy odpalaniu zsynchronizowanych zdarzeń animacji.
+- **Alternatywy:** MP3 (niezalecany dla krótkich sampli ze względu na opóźnienia dekompresji i obcięte pasmo wysokich tonów), OGG Vorbis.
+- **Kryteria decyzyjne:** Zachowanie studyjnej czystości głosu, brak opóźnień (zero-latency) przy odpalaniu zsynchronizowanych zdarzeń animacji.
 
-### 2.4. Scenariusze i Specyfikacja Techniczna: Markdown (.md) oraz Notacje JSON
+### 2.4. Format Muzyki Tła (Soundtrack / BGM): MP3 (Streaming Audio)
+- **Rola w projekcie:** Przechowywanie pełnowymiarowych, wielominutowych utworów muzycznych w katalogu `Soundtrack/`.
+- **Dlaczego MP3 dla muzyki?** Utwory trwające 4–5 minut w nieskompresowanym formacie WAV zajmowałyby po 50–70 MB każdy, drastycznie obciążając pamięć RAM silnika gry. Skompresowany format MP3 (5–6 MB) pozwala na bezpośredni streaming z nośnika (audio streaming) bez alokacji całego utworu w pamięci operacyjnej.
+- **Alternatywy:** WAV (zbyt duży rozmiar pliku), FLAC (zbędny narzut pamięciowy w grach czasu rzeczywistego).
+- **Kryteria decyzyjne:** Optymalny stosunek wierności brzmienia orkiestry do rozmiaru pliku, wsparcie streamingu dyskowego w Unity, Unreal i Godot.
+
+### 2.5. Scenariusze i Specyfikacja Techniczna: Markdown (.md) oraz Notacje JSON
 - **Rola w projekcie:** Definicja 10 scenariuszy egzekucji frakcyjnych w katalogu `Scenarios/`.
 - **Dlaczego Markdown + JSON?** Format Markdown jest czytelny zarówno dla człowieka (reżysera, animatora, osoby nietechnicznej), jak i maszynowo interpretowalny. Wbudowane bloki schematów JSON umożliwiają automatycznym parserom i generatorom kodu w silniku natychmiastowe zbudowanie tablicy zdarzeń (`Animation Event Track`).
 - **Alternatywy:** Dokumenty Word / PDF (nieprzejrzyste dla systemów kontroli wersji Git, brak automatycznego parsowania), bazy SQL (zbędna złożoność na etapie prototypowania).
 - **Kryteria decyzyjne:** Pełna integracja z GitHubem, łatwa edycja w dowolnym edytorze, czytelne diffy w historii wersji.
 
-### 2.5. Kontrola Wersji: Git & GitHub
+### 2.6. Kontrola Wersji: Git & GitHub
 - **Rola w projekcie:** Śledzenie zmian, tworzenie bezpiecznych kopii zapasowych, wersjonowanie i integracja pracy agentów AI z repozytorium zdalnym.
 - **Dlaczego Git?** Niezawodny, rozproszony system kontroli wersji, standard światowej inżynierii oprogramowania.
 
