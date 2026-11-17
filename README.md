@@ -68,6 +68,22 @@ Kolekcja zawiera 52 modele FBX:
 
 ---
 
+## Referencje do cutscenek (`Cutscenes/`)
+
+Katalog `Cutscenes/` zawiera materiały wideo (MP4) stanowiące referencje narracyjne i animacyjne:
+- `gobliny .mp4`
+- `horda .mp4`
+- `klan Krwawego Cienia .mp4`
+- `kowboj .mp4`
+- `najemnicy .mp4`
+- `pirat.mp4`
+- `rzeźnia .mp4`
+- `syndykat .mp4`
+- `wikingowie .mp4`
+- `zakon.mp4`
+
+---
+
 ## Zastosowanie
 - **Game Engine**: Unity, Unreal Engine 5, Godot Engine.
 - **DCC Tools**: Blender, Autodesk Maya, 3ds Max.
