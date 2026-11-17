@@ -117,17 +117,19 @@ Katalog `Scenarios/` zawiera kompletne, techniczne specyfikacje dla programu i k
 
 ---
 
-## Dedykowane modele postaci BloodChess (`modeleBC/`)
+## Dedykowane modele postaci i figur BloodChess (`modeleBC/`)
 
-Katalog `modeleBC/` zawiera 10 unikalnych, dedykowanych modeli 3D postaci stworzonych specjalnie dla każdej z frakcji gry **BloodChess** w nowoczesnym formacie binarnym glTF 2.0 (`.glb`):
+Katalog `modeleBC/` zawiera dedykowane modele 3D postaci frakcyjnych oraz kluczowych figur bitewnych stworzonych specjalnie dla gry **BloodChess** w nowoczesnym formacie binarnym glTF 2.0 (`.glb`):
 - `goblin.glb` – Sabat Goblinów
 - `horda.glb` – Horda
 - `klan.glb` – Klan Krwawego Cienia
+- `kon.glb` – Koń / Skoczek bitewny (Knight)
 - `korsarz.glb` – Korsarze
 - `kowboj.glb` – Kowboj
 - `najemnicy.glb` – Najemnicy
 - `rzeznik.glb` – Rzeźnia
 - `Syndykat.glb` – Syndykat
+- `wieza.glb` – Wieża / Podstawa wieży (Rook)
 - `wiking.glb` – Wikingowie z krwawego fiordu
 - `zakon.glb` – Zakon
 

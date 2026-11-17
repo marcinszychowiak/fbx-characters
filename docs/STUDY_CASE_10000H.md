@@ -61,5 +61,14 @@ Plik był w 100% kompletnym, nieuszkodzonym modelem GLB, który z przyczyn syste
 
 ---
 
-### 3. Lekcja z vibecodingu
+### 3. Rozszerzenie o kluczowe figury szachowe: Koń i Wieża
+Kolejnym krokiem twórcy było dostarczenie dedykowanych modeli kluczowych figur bitewnych:
+- `kon.glb` (12.4 MB) – model konia / skoczka szachowego,
+- `wieza.glb` (15.7 MB) – model wieży / podstawy pod wieżę.
+
+Agent natychmiast zweryfikował sumy kontrolne i nagłówki glTF 2.0 obu plików, po czym zintegrował je ze strukturą `modeleBC/` i zaktualizował dokumentację projektu.
+
+---
+
+### 4. Lekcja z vibecodingu
 > **Wniosek:** Dojrzały asystent vibecodingu nie jest biernym wykonawcą poleceń typu „kopiuj-wklej”. Prawdziwa wartość pojawia się wtedy, gdy agent potrafi przeprowadzić inspekcję heksadecymalną nagłówków binarnych, wykryć anomalie w plikach i zabezpieczyć integralność projektu zanim jakikolwiek błąd trafi na produkcję.
