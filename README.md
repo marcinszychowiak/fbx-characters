@@ -100,6 +100,23 @@ Katalog `BloodChess/` zawiera linie dialogowe i kwestie głosowe (pliki audio `.
 
 ---
 
+## Scenariusze i Specyfikacje Cutscenek (`Scenarios/`)
+
+Katalog `Scenarios/` zawiera kompletne, techniczne specyfikacje dla programu i kreatora gry **BloodChess** do implementacji i wygenerowania 10 sekwencji takedownów:
+- [README.md (Architektura i indeks)](Scenarios/README.md)
+- `01_Kowboj.md` – Egzekucja rewolwerem pod brodą
+- `02_Sabat_Goblinow.md` – Podpalenie ofiary cieczą łatwopalną
+- `03_Horda.md` – Kanibalistyczny atak zombie na gardło
+- `04_Klan_Krwawego_Cienia.md` – Dekapitacja kataną i gejzer krwi
+- `05_Najemnicy.md` – Taktyczne poderżnięcie gardła nożem bojowym
+- `06_Korsarze.md` – Powalenie i wielokrotne sztyletowanie w parterze
+- `07_Rzeznia.md` – Rozpuszczenie twarzy kwasem chemicznym
+- `08_Syndykat.md` – Mafijna eliminacja pchnięciem stiletto
+- `09_Wikingowie.md` – Rozbicie mostka i wbicie topora bojowego
+- `10_Zakon.md` – Święte cięcie egzekucyjne dwuręcznym mieczem
+
+---
+
 ## Zastosowanie
 - **Game Engine**: Unity, Unreal Engine 5, Godot Engine.
 - **DCC Tools**: Blender, Autodesk Maya, 3ds Max.
