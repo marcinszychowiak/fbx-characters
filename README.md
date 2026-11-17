@@ -119,20 +119,32 @@ Katalog `Scenarios/` zawiera kompletne, techniczne specyfikacje dla programu i k
 
 ## Dedykowane modele postaci i figur BloodChess (`modeleBC/`)
 
-Katalog `modeleBC/` zawiera dedykowane modele 3D postaci frakcyjnych oraz kluczowych figur bitewnych stworzonych specjalnie dla gry **BloodChess** w nowoczesnym formacie binarnym glTF 2.0 (`.glb`):
-- `goblin.glb` – Sabat Goblinów
-- `horda.glb` – Horda
-- `klan.glb` – Klan Krwawego Cienia
-- `kon.glb` – Koń / Skoczek bitewny (Knight)
-- `korsarz.glb` – Korsarze
-- `kowboj.glb` – Kowboj
-- `najemnicy.glb` – Najemnicy
-- `rzeznik.glb` – Rzeźnia
-- `Syndykat.glb` – Syndykat
-- `wieza.glb` – Wieża / Podstawa wieży (Rook)
-- `wiking.glb` – Wikingowie z krwawego fiordu
-- `zakon.glb` – Zakon
-- `korona.glb` – Korona / Atrybut królewski (King & Queen)
+Katalog `modeleBC/` zawiera dedykowane modele 3D postaci frakcyjnych oraz kluczowych figur bitewnych stworzonych specjalnie dla gry **BloodChess** w formacie binarnym glTF 2.0 (`.glb`). 
+
+> [!IMPORTANT]
+> **Gotowość do animacji i montażu (Rigging & Sockets):**  
+> Wszystkie modele postaci zostały wyposażone w **szkielet humanoid (19 kości)** z automatycznymi wagami deformacji (skinning) oraz **wbudowane sockety (Empty Objects)** dla elementów ekwipunku:
+> - `Socket_Crown` – punkt na czubku głowy dla korony (`korona.glb`) oraz nakryć ról,
+> - `Socket_Hand_R` – punkt w prawej dłoni dla broni głównej,
+> - `Socket_Hand_L` – punkt w lewej dłoni dla tarczy/przedmiotu,
+> - `Socket_Back` – punkt na plecach pod pelerynę,
+> - `Socket_Rider` – punkt siodła w `kon.glb` oraz podestu w `wieza.glb`.  
+> Siatki zostały zoptymalizowane do poziomu ~20 000 trójkątów per model (rozmiar każdego pliku zredukowany z ~15 MB do ok. 1.3 MB), co zapewnia natychmiastowe ładowanie i płynne 60 fps.
+
+### Lista modeli:
+- `goblin.glb` – Sabat Goblinów (Humanoid Rig + Sockets)
+- `horda.glb` – Horda (Humanoid Rig + Sockets)
+- `klan.glb` – Klan Krwawego Cienia (Humanoid Rig + Sockets)
+- `kon.glb` – Koń / Skoczek bitewny (`Socket_Rider` w siodle)
+- `korsarz.glb` – Korsarze (Humanoid Rig + Sockets)
+- `kowboj.glb` – Kowboj (Humanoid Rig + Sockets)
+- `najemnicy.glb` – Najemnicy (Humanoid Rig + Sockets)
+- `rzeznik.glb` – Rzeźnia (Humanoid Rig + Sockets)
+- `Syndykat.glb` – Syndykat (Humanoid Rig + Sockets)
+- `wieza.glb` – Wieża / Podstawa wieży (`Socket_Rider` na platformie)
+- `wiking.glb` – Wikingowie z krwawego fiordu (Humanoid Rig + Sockets)
+- `zakon.glb` – Zakon (Humanoid Rig + Sockets)
+- `korona.glb` – Korona / Atrybut królewski (dolna obręcz wycentrowana na `(0, 0, 0)`)
 
 > [!NOTE]
 > **Wykorzystanie korony (`korona.glb`) w armii:**  

@@ -100,5 +100,20 @@ Dzięki temu w kolejnych etapach prac żaden proceduralny element nie zostanie p
 
 ---
 
-### 5. Lekcja z vibecodingu
-> **Wniosek:** Dojrzały asystent vibecodingu nie jest biernym wykonawcą poleceń typu „kopiuj-wklej”. Prawdziwa wartość pojawia się wtedy, gdy agent potrafi przeprowadzić inspekcję heksadecymalną nagłówków binarnych, wykryć anomalie w plikach i zabezpieczyć integralność projektu zanim jakikolwiek błąd trafi na produkcję. Ponadto natychmiast rejestruje strategiczne wytyczne twórcy w formie trwałej dokumentacji inżynieryjnej, zabezpieczając projekt przed zapomnieniem i chaosem.
+## Wpis 5: Headless Blender w służbie vibecodingu — automatyczny Rigging, Skinning i Sockety
+
+### 1. Dylemat twórcy: Koszty auto-riggingu w AI generatorach
+Generatory takie jak Tripo.AI pobierają dodatkowe kredyty lub wysokie opłaty za rigging modeli, a dodatkowo generują surowe pliki o monstrualnej gęstości (nawet 500 000 trójkątów na prostą postać i 15 MB wagi), pozbawione punktów montażowych pod ekwipunek. Twórca zadał kluczowe pytanie:
+> *„Czy sam masz możliwość implementacji np. Blendera, żeby zająć się tym problemem za mnie? (...) Wolę, żebyś całą pracę ze szkieletowaniem wykonał w blenderze za mnie, bo Tripo skasuje mnie za auto-rigging.”*
+
+### 2. Architekt wkracza do akcji: Bezzałogowy pipeline 3D
+Agent zainstalował w tle **Blendera 4.2 LTS** i napisał skrypt Python do masowego przetwarzania assetów glTF:
+1. **Humanoid Rigging:** Dla każdej z 10 frakcji wygenerowano anatomię 19 kości humanoid (miednica, kręgosłup, klatka, szyja, głowa, ręce, nogi, stopy).
+2. **Smooth Distance Skinning:** Opracowano odporny na geometrię non-manifold algorytm przypisywania wag wierzchołków do segmentów kości, gwarantujący deformację siatek bez błędów.
+3. **Wstrzykiwanie Socketów:** Automatycznie zakotwiczono obiekty Empty (`Socket_Crown`, `Socket_Hand_R`, `Socket_Hand_L`, `Socket_Back` na postaciach oraz `Socket_Rider` w siodle konia i na wieży).
+4. **Drastyczna optymalizacja (Decimate):** Każdy model zredukowano z 500k ścianek do 20k, zmniejszając wagę plików z ~15 MB do ok. 1.3 MB (cały pakiet zredukowany ze 150 MB do zaledwie 17 MB!).
+
+---
+
+### 6. Lekcja z vibecodingu
+> **Wniosek:** AI asystent nowej generacji nie zatrzymuje się na pisaniu kodu tekstowego. Gdy pojawia się wąskie gardło budżetowe lub manualne (jak rigging siatek 3D), agent przejmuje stery nad profesjonalnymi narzędziami inżynieryjnymi (Headless Blender), wykonując w tle godziny żmudnej pracy 3D artisty w kilkadziesiąt sekund.
