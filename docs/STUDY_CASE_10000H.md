@@ -85,5 +85,20 @@ Zamiast wrzucać plik muzyczny jako luźny asset, agent opracował kompletną sp
 
 ---
 
-### 4. Lekcja z vibecodingu
-> **Wniosek:** Dojrzały asystent vibecodingu nie jest biernym wykonawcą poleceń typu „kopiuj-wklej”. Prawdziwa wartość pojawia się wtedy, gdy agent potrafi przeprowadzić inspekcję heksadecymalną nagłówków binarnych, wykryć anomalie w plikach i zabezpieczyć integralność projektu zanim jakikolwiek błąd trafi na produkcję.
+## Wpis 4: Od proceduralnych brył do AAA — zarządzanie długiem wizualnym Three.js
+
+### 1. Prześwietlenie prototypu silnika
+W fazie szybkiego prototypowania mechanik gry wiele elementów powstało jako proceduralne geometrie Three.js (walce, stożki, prostopadłościany) tworzące prowizoryczne bronie, cokoły i scenografię. Twórca przekazał pełne zestawienie miejsc w kodzie (`pieceBuilder.ts`, `queenCutsceneDirector.ts`, `ChessSceneManager.ts`), które czekają na podmianę na profesjonalne modele 3D.
+
+### 2. Rola Architekta: Zabezpieczenie ciągłości wiedzy
+Prawdziwy architekt projektu nie gubi takich ustaleń na czacie. Informacje zostały natychmiast skodyfikowane w oficjalnym dokumencie technicznym `docs/ROADMAP_ASSETOW_3D.md`:
+- Podział na 5 obszarów assetów z identyfikatorami zmiennych z silnika.
+- Ustalenie ścisłej hierarchii priorytetów (P1: Bronie i tarcze, P2: Cokoły i nakrycia rang, P3: Rekwizyty egzekucji Hetmana, P4: Otoczenie areny).
+- Zdefiniowanie specyfikacji technicznej dla przyszłych plików GLB (punkty obrotu pivot, budżet poligonów, standard skali 1:1).
+
+Dzięki temu w kolejnych etapach prac żaden proceduralny element nie zostanie pominięty, a gra płynnie przekształci się z funkcjonalnego prototypu w dopracowaną produkcję.
+
+---
+
+### 5. Lekcja z vibecodingu
+> **Wniosek:** Dojrzały asystent vibecodingu nie jest biernym wykonawcą poleceń typu „kopiuj-wklej”. Prawdziwa wartość pojawia się wtedy, gdy agent potrafi przeprowadzić inspekcję heksadecymalną nagłówków binarnych, wykryć anomalie w plikach i zabezpieczyć integralność projektu zanim jakikolwiek błąd trafi na produkcję. Ponadto natychmiast rejestruje strategiczne wytyczne twórcy w formie trwałej dokumentacji inżynieryjnej, zabezpieczając projekt przed zapomnieniem i chaosem.
