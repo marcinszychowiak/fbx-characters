@@ -115,5 +115,23 @@ Agent zainstalował w tle **Blendera 4.2 LTS** i napisał skrypt Python do masow
 
 ---
 
-### 6. Lekcja z vibecodingu
-> **Wniosek:** AI asystent nowej generacji nie zatrzymuje się na pisaniu kodu tekstowego. Gdy pojawia się wąskie gardło budżetowe lub manualne (jak rigging siatek 3D), agent przejmuje stery nad profesjonalnymi narzędziami inżynieryjnymi (Headless Blender), wykonując w tle godziny żmudnej pracy 3D artisty w kilkadziesiąt sekund.
+## Wpis 6: Pierwsza partia oręża — wdrożenie dedykowanego uzbrojenia ról specjalnych
+
+### 1. Przejście od teorii do praktyki
+Po ustaleniu mapy drogowej (`docs/ROADMAP_ASSETOW_3D.md`) twórca wygenerował w Tripo.AI pierwszą partię 6 dedykowanych modeli z Priorytetu P1:
+- `miecz_krola.glb` i `berlo.glb` (Król),
+- `sztylet_krolowa.glb` (Królowa / Hetman),
+- `kopia.glb` i `puklerz.glb` (Skoczek),
+- `kostur_gonca.glb` (Goniec).
+
+### 2. Automatyczna kalibracja punktów chwytu (Grip Origin)
+Pliki pobrane bezpośrednio z Tripo miały domyślnie punkt zerowy na spodzie geometrii (`Z = 0`), co spowodowałoby, że dłoń postaci trzymałaby miecz za czubek głowicy, a puklerz za dolną krawędź.
+Headless Blender w locie:
+- Obliczył środek geometryczny i przesunął rękojeści miecza, sztyletu, berła, kopii i kostura dokładnie w oś `(0, 0, 0)` na wysokości chwytu dłoni,
+- Wypoziomował wewnętrzny uchwyt puklerza na `Y = 0` z centrowaniem `X, Z = 0`,
+- Wyeksportował perfekcyjnie skalibrowane modele prosto do silnika gry.
+
+---
+
+### 7. Lekcja z vibecodingu
+> **Wniosek:** AI asystent nowej generacji nie zatrzymuje się na pisaniu kodu tekstowego. Gdy pojawia się wąskie gardło budżetowe lub manualne (jak rigging siatek 3D czy kalibracja pivotów), agent przejmuje stery nad profesjonalnymi narzędziami inżynieryjnymi (Headless Blender), wykonując w tle godziny żmudnej pracy 3D artisty w kilkadziesiąt sekund. Zgrany tandem człowiek-AI pozwala w jeden wieczór zamknąć etapy produkcji, które dawniej wymagały całego studia deweloperskiego.

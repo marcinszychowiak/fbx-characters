@@ -146,6 +146,14 @@ Katalog `modeleBC/` zawiera dedykowane modele 3D postaci frakcyjnych oraz kluczo
 - `zakon.glb` – Zakon (Humanoid Rig + Sockets)
 - `korona.glb` – Korona / Atrybut królewski (dolna obręcz wycentrowana na `(0, 0, 0)`)
 
+### Dedykowane uzbrojenie i ekwipunek ról (Grip Origin w `0, 0, 0`):
+- `miecz_krola.glb` – Miecz królewski (chwyt rękojeści z jelcem w `Z = 0`)
+- `berlo.glb` – Berło królewskie (chwyt w `Z = 0`)
+- `sztylet_krolowa.glb` – Sztylet paradny Królowej (chwyt w `Z = 0`)
+- `kopia.glb` – Kopia kawaleryjska Skoczka (punkt chwytu za tarczką w `Z = 0`)
+- `puklerz.glb` – Mała tarcza / puklerz Skoczka (wewnętrzny uchwyt w `Y = 0`, centrowanie `X,Z = 0`)
+- `kostur_gonca.glb` – Pastorał / kostur Gońca (środek chwytu drzewca w `Z = 0`)
+
 > [!NOTE]
 > **Wykorzystanie korony (`korona.glb`) w armii:**  
 > W obrębie danej armii model korony jest wykorzystywany **dwukrotnie** z odpowiednim skalowaniem w silniku gry:

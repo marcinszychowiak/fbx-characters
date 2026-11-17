@@ -8,7 +8,7 @@ Dokument stanowi oficjalny rejestr techniczny i mapę drogową (Backlog Inżynie
 
 | Priorytet | Obszar Assetów | Plik w Kodzie Silnika | Uzasadnienie | Status |
 | :---: | :--- | :--- | :--- | :---: |
-| **P1** | **Zestaw Broni i Tarcz** | `pieceBuilder.ts` | Najbardziej rzuca się w oczy podczas zbliżeń kamery i animacji takedownów; obecne bryły kanciaste zaburzają immersję. | Oczekuje na GLB |
+| **P1** | **Zestaw Broni i Tarcz** | `pieceBuilder.ts` | Najbardziej rzuca się w oczy podczas zbliżeń kamery i animacji takedownów; obecne bryły kanciaste zaburzają immersję. | Role specjalne: WDROŻONE (`modeleBC/`)<br>Frakcyjne: W toku |
 | **P2** | **Cokoły (Podstawki) i Nakrycia Ról** | `pieceBuilder.ts` | Kluczowe dla natychmiastowej czytelności hierarchii szachowej (Król, Hetman, Goniec, Skoczek, Wieża). | Częściowo (`korona.glb`) |
 | **P3** | **Rekwizyty Cutscenek Egzekucji** | `queenCutsceneDirector.ts` | Wyświetlane na pełnym ekranie w zbliżeniach makro podczas bicia Hetmana (wiadro, kwas, odcięta głowa). | Oczekuje na GLB |
 | **P4** | **Otoczenie Areny i Szachownica** | `ChessSceneManager.ts` | Tło sceny (koksowniki, kolumny cytadeli, rzeźbiona rama stołu szachowego). | Oczekuje na GLB |
@@ -24,24 +24,19 @@ Wszystkie obiekty trzymane w rękach figur na szachownicy składane są obecnie 
 
 #### A. Bronie Ról Specjalnych (Wspólne dla wszystkich armii):
 - **Król (King):**
-  - *Prawa dłoń:* Miecz królewski z jelcem i głowicą (`royal_hilt`, `royal_guard`, `blade`).
-  - *Lewa dłoń:* Berło królewskie i jabłko panowania (`king_scepter_rod`, `king_orb`).
-  - *Rekomendowany model docelowy:* `prop_king_regalia.glb` (lub rozdzielne: `sword_king.glb`, `scepter_orb.glb`).
+  - *Prawa dłoń:* Miecz królewski z jelcem i głowicą (`royal_hilt`, `royal_guard`, `blade`). **Status:** WDROŻONO model `miecz_krola.glb` (chwyt w `Z = 0`).
+  - *Lewa dłoń:* Berło królewskie i jabłko panowania (`king_scepter_rod`, `king_orb`). **Status:** WDROŻONO model `berlo.glb` (chwyt w `Z = 0`).
 - **Królowa / Hetman (Queen):**
-  - *Lewa dłoń:* Sztylet paradny z ozdobną rękojeścią (`queen_dagger_hilt` + ostrze).
-  - *Rekomendowany model docelowy:* `prop_queen_parade_dagger.glb`.
+  - *Lewa dłoń:* Sztylet paradny z ozdobną rękojeścią (`queen_dagger_hilt` + ostrze). **Status:** WDROŻONO model `sztylet_krolowa.glb` (chwyt w `Z = 0`).
 - **Skoczek (Knight — Jeździec na `kon.glb`):**
-  - *Prawa dłoń:* Długa kopia kawaleryjska z proporcem (`cavalry_lance`).
-  - *Lewa dłoń:* Mała okrągła tarcza kawaleryjska / puklerz (`knight_buckler`).
-  - *Rekomendowany model docelowy:* `prop_cavalry_lance.glb`, `prop_buckler_shield.glb`.
+  - *Prawa dłoń:* Długa kopia kawaleryjska z proporcem (`cavalry_lance`). **Status:** WDROŻONO model `kopia.glb` (chwyt za tarczką w `Z = 0`).
+  - *Lewa dłoń:* Mała okrągła tarcza kawaleryjska / puklerz (`knight_buckler`). **Status:** WDROŻONO model `puklerz.glb` (uchwyt w `Y = 0`).
 - **Goniec (Bishop):**
-  - *Prawa dłoń:* Długi kostur / pastorał zwieńczony klejnotem lub grotem (`bishop_staff`).
+  - *Prawa dłoń:* Długi kostur / pastorał zwieńczony klejnotem lub grotem (`bishop_staff`). **Status:** WDROŻONO model `kostur_gonca.glb` (środek chwytu w `Z = 0`).
   - *Lewa dłoń:* Rytualna kadzielnica na łańcuchu lub święty kielich (`bishop_censer`).
-  - *Rekomendowany model docelowy:* `prop_bishop_staff.glb`, `prop_censer.glb`.
 - **Wieża (Rook — Strażnik na baszcie `wieza.glb`):**
   - *Prawa dłoń:* Ciężki dwuręczny młot oblężniczy (`rook_maul`).
   - *Lewa dłoń:* Wielka prostokątna tarcza piechoty / pawęż (`rook_pavise_shield`).
-  - *Rekomendowany model docelowy:* `prop_rook_maul.glb`, `prop_pavise_shield.glb`.
 
 #### B. Bronie Frakcyjne (Piony i Królowe wg `weaponStyle`):
 - **Wikingowie / Rzeźnicy:** Topór bojowy jednoręczny/dwuręczny (`axe_shield`, `butcher_cleaver`) + tarcza wikingów.
