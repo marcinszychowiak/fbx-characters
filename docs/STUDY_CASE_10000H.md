@@ -133,5 +133,26 @@ Headless Blender w locie:
 
 ---
 
-### 7. Lekcja z vibecodingu
-> **Wniosek:** AI asystent nowej generacji nie zatrzymuje się na pisaniu kodu tekstowego. Gdy pojawia się wąskie gardło budżetowe lub manualne (jak rigging siatek 3D czy kalibracja pivotów), agent przejmuje stery nad profesjonalnymi narzędziami inżynieryjnymi (Headless Blender), wykonując w tle godziny żmudnej pracy 3D artisty w kilkadziesiąt sekund. Zgrany tandem człowiek-AI pozwala w jeden wieczór zamknąć etapy produkcji, które dawniej wymagały całego studia deweloperskiego.
+## Wpis 7: Luksusowa arena z onyksu i marmuru — kalibracja szachownicy (plansza.glb)
+
+### 1. Krok ku immersji wizualnej
+Dotychczasowa arena opierała się na proceduralnej geometrii generowanej w locie przez kod `ChessSceneManager.ts` (proste kafelki Three.js). Twórca dostarczył wysokiej klasy model 3D: `luxury_onyx_and_marble_chess_board.glb` – rzeźbioną planszę łączącą polerowany czarny onyks, biały marmur oraz zdobioną mosiężną ramę.
+
+### 2. Wyzwanie architektoniczne: Geometria vs Silnik Gry
+W modelach 3D wymiary siatki pól rzadko pokrywają się z matematyką logiki gry:
+- W silniku BloodChess każde z 64 pól szachownicy ma dokładnie szerokość **1.15 m** (cała siatka $8 \times 8$ to **9.20 m**).
+- Płaszczyzna gry, po której stąpają figury, musi znajdować się dokładnie na wysokości **$Y = 0$** ($Z = 0$ w Blenderze).
+Oryginalny model posiadał pole o szerokości 0.445 m, a powierzchnia kafelków znajdowała się na wysokości $Z = 0.152\text{ m}$. Bez korekty figury zapadałyby się w marmur lub lewitowały nad stołem, a pola nie pokrywałyby się ze współrzędnymi ruchów logicznych szachów.
+
+### 3. Zautomatyzowana interwencja w Blenderze Headless
+Agent przeprowadził matematyczną kalibrację assetu w skrypcie Python:
+1. **Precyzyjne skalowanie:** Zastosowano współczynnik skali $2.584836$, idealnie dopasowując szerokość pojedynczego pola do $1.15\text{ m}$ (rozpiętość samej siatki gry $8 \times 8$ wynosi dokładnie $9.20\text{ m}$, a całości z obramowaniem $9.74\text{ m}$).
+2. **Niwelacja płaszczyzny gry:** Wierzch marmurowych kafelków przesunięto o $-0.152108\text{ m}$, ustawiając płaszczyznę stóp figur idealnie na $Y = 0$.
+3. **Punkty referencyjne silnika:** Dodano precyzyjne węzły Empty: `Board_Center` w $(0, 0, 0)$, `Tile_A1_Corner` w $(-4.60, -4.60, 0)$ oraz `Tile_H8_Corner` w $(4.60, 4.60, 0)$, umożliwiające silnikowi natychmiastowe kotwiczenie logiki raycastingu i przemieszczania bierek.
+
+Wyeksportowano gotowy do użycia model `modeleBC/plansza.glb` (oraz alias `luxury_onyx_and_marble_chess_board.glb`) w standardzie glTF 2.0 PBR.
+
+---
+
+### Podsumowanie lekcji z vibecodingu
+> **Wniosek:** AI asystent nowej generacji nie zatrzymuje się na pisaniu kodu tekstowego. Gdy pojawia się wąskie gardło budżetowe lub manualne (jak rigging siatek 3D czy kalibracja pivotów i wymiarów pól), agent przejmuje stery nad profesjonalnymi narzędziami inżynieryjnymi (Headless Blender), wykonując w tle godziny żmudnej pracy 3D artisty w kilkadziesiąt sekund. Zgrany tandem człowiek-AI pozwala w jeden wieczór zamknąć etapy produkcji, które dawniej wymagały całego studia deweloperskiego.

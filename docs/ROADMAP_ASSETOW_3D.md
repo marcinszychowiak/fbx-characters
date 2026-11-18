@@ -11,7 +11,7 @@ Dokument stanowi oficjalny rejestr techniczny i mapę drogową (Backlog Inżynie
 | **P1** | **Zestaw Broni i Tarcz** | `pieceBuilder.ts` | Najbardziej rzuca się w oczy podczas zbliżeń kamery i animacji takedownów; obecne bryły kanciaste zaburzają immersję. | Role specjalne: WDROŻONE (`modeleBC/`)<br>Frakcyjne: W toku |
 | **P2** | **Cokoły (Podstawki) i Nakrycia Ról** | `pieceBuilder.ts` | Kluczowe dla natychmiastowej czytelności hierarchii szachowej (Król, Hetman, Goniec, Skoczek, Wieża). | Częściowo (`korona.glb`) |
 | **P3** | **Rekwizyty Cutscenek Egzekucji** | `queenCutsceneDirector.ts` | Wyświetlane na pełnym ekranie w zbliżeniach makro podczas bicia Hetmana (wiadro, kwas, odcięta głowa). | Oczekuje na GLB |
-| **P4** | **Otoczenie Areny i Szachownica** | `ChessSceneManager.ts` | Tło sceny (koksowniki, kolumny cytadeli, rzeźbiona rama stołu szachowego). | Oczekuje na GLB |
+| **P4** | **Otoczenie Areny i Szachownica** | `ChessSceneManager.ts` | Tło sceny (koksowniki, kolumny cytadeli, rzeźbiona rama stołu szachowego). | Szachownica: WDROŻONO (`plansza.glb`)<br>Otoczenie: W toku |
 | **P5** | **Warianty Postaci Frakcji** | `modeleBC/` | Opcjonalne warianty siatki postaci dla poszczególnych ról (alternatywa dla dekorowania bazowego wojownika). | Baza frakcyjna gotowa |
 
 ---
@@ -88,7 +88,7 @@ W scenach bicia Hetmana używane są dedykowane, przeskalowane rekwizyty cinemat
 ### 2.4. Arena i Otoczenie Szachownicy (`ChessSceneManager.ts`) — [PRIORYTET P4]
 
 Elementy scenografii sali bitewnej:
-- **Szachownica i Rama:** Płyta obsydianowa z mosiężnym obramowaniem (`outerFrame`, `trimBox`, `tileGeo`). Docelowo rzeźbiony stół bitewny `arena_board_frame.glb`.
+- **Szachownica i Rama:** Płyta obsydianowa z mosiężnym obramowaniem (`outerFrame`, `trimBox`, `tileGeo`). **Status:** WDROŻONO model `plansza.glb` (rzeźbiony stół z czarnego onyksu i białego marmuru; skala skalibrowana do 1 pole = `1.15 m`, 64 pola = `9.20 m`, powierzchnia kafelków w `Y = 0`, z węzłami pomocniczymi `Board_Center`, `Tile_A1_Corner`, `Tile_H8_Corner`).
 - **Koksowniki Narożne (4 sztuki):** Stojaki ze stożkowymi bryłami ognia (`stand`, `bowl`, `coals`, `flameGroup`). Docelowo gotowy model koksownika `prop_brazier.glb` ze zintegrowanym punktem emisyjnym dla cząsteczek ognia.
 - **Kolumny Cytadeli w Tle (8 sztuk):** Walce geometryczne (`bgPillarGeo`). Docelowo modułowe kolumny kamienne `arch_citadel_pillar.glb`.
 - **Kamienna Posadzka:** Płaski okrąg (`floor`).

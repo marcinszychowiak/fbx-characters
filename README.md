@@ -154,6 +154,9 @@ Katalog `modeleBC/` zawiera dedykowane modele 3D postaci frakcyjnych oraz kluczo
 - `puklerz.glb` – Mała tarcza / puklerz Skoczka (wewnętrzny uchwyt w `Y = 0`, centrowanie `X,Z = 0`)
 - `kostur_gonca.glb` – Pastorał / kostur Gońca (środek chwytu drzewca w `Z = 0`)
 
+### Scenografia i Arena:
+- `plansza.glb` (alias: `luxury_onyx_and_marble_chess_board.glb`) – Luksusowy stół szachowy z polerowanego czarnego onyksu, białego marmuru i mosiężnego okuciu. Skalibrowany dokładnie pod silnik: 1 pole = `1.15 m` (szerokość 8x8 pól = `9.20 m`), wierzch kafelków dokładnie na `Y = 0`, z węzłami pomocniczymi `Board_Center`, `Tile_A1_Corner`, `Tile_H8_Corner`.
+
 > [!NOTE]
 > **Wykorzystanie korony (`korona.glb`) w armii:**  
 > W obrębie danej armii model korony jest wykorzystywany **dwukrotnie** z odpowiednim skalowaniem w silniku gry:
