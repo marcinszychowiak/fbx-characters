@@ -179,7 +179,8 @@ Zestaw modeli 3D glTF 2.0 wygenerowanych z glifów Unicode (wysokość `0.40 m`,
 - `symbol_skoczek.glb` – Symbol Skoczka (♘ / ♞)
 - `symbol_pion.glb` – Symbol Piona (♙ / ♟)
 - `symbole_szachowe_3d.glb` – Paczka zbiorcza ze wszystkimi 6 symbolami.
-- `showcase_symbole_szachowe_3d.png` – Prezentacja wizualna symboli z oświetleniem w kolorach frakcji.
+- `showcase_symbole_szachowe_3d.png` – Prezentacja wizualna 6 symboli szachowych.
+- `showcase_10_frakcji_kolory.png` – Oficjalna paleta 10 frakcji z przypisanymi barwami i emisyjnym blaskiem PBR.
 
 ### Scenografia i Arena:
 - `plansza.glb` (alias: `luxury_onyx_and_marble_chess_board.glb`) – Luksusowy stół szachowy z polerowanego czarnego onyksu, białego marmuru i mosiężnego okuciu. Skalibrowany dokładnie pod silnik: 1 pole = `1.15 m` (szerokość 8x8 pól = `9.20 m`), wierzch kafelków dokładnie na `Y = 0`, z węzłami pomocniczymi `Board_Center`, `Tile_A1_Corner`, `Tile_H8_Corner`.
