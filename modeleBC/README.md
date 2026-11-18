@@ -66,9 +66,11 @@ Wszystkie bronie mają punkt chwytu wycentrowany dokładnie w `(0, 0, 0)`, co um
 
 ---
 
-## 6. Lewitujące Symbole Szachowe 3D (Unicode PBR)
+## 6. Lewitujące Symbole Szachowe 3D (Unicode PBR z Czarnym Rantem)
 
-Wysokość `0.40 m`, pivot w środku geometrycznym `(0, 0, 0)`, przygotowane pod dynamiczne kolorowanie PBR barwami frakcji:
+Wysokość `0.40 m`, pivot w środku geometrycznym `(0, 0, 0)`. Modele posiadają **2 sloty materiałowe**:
+- **Slot 0 (`Symbol_Faction_Face`):** Awers i rewers symbolu – podmieniany w kodzie na barwę armii gracza.
+- **Slot 1 (`Symbol_Black_Rim`):** Krawędź fazowana i boki w głębokiej czerni – tworzą ostry, czytelny kontur na dowolnym tle.
 - `symbol_krol.glb` – Symbol Króla (♔ / ♚),
 - `symbol_hetman.glb` – Symbol Hetmana / Królowej (♕ / ♛),
 - `symbol_wieza.glb` – Symbol Wieży (♖ / ♜),
@@ -87,7 +89,14 @@ Wysokość `0.40 m`, pivot w środku geometrycznym `(0, 0, 0)`, przygotowane pod
 - `koksownik.glb` – Mosiężno-kamienny koksownik zamkowy (wysokość $1.41\text{ m}$, gniazdo `Socket_Flame`).
 - `ogien_do_koksownika.glb` – Animowany ogień płomieni (192 meshe, pętla 30 klatek).
 - `koksownik_z_ogniem.glb` – Zintegrowany koksownik z animowanym ogniem.
+- `sztandar.glb` – Samodzielny powiewający sztandar heraldyczny z 10-kościowym szkieletem (zorientowany pionowo w dół, długość 7.10 m, szerokość 1.61 m).
 - `sceneria_lochy.glb` – **Kompletna arena lochów 3D**:
+  - Centralna platforma szachownicy z polerowanego marmuru i onyksu,
+  - **Masywna kamienna podmurówka (`Arena_Chess_Podium`)** zamykająca w 100% pustkę pod szachownicą ($10.38	ext{ m} 	imes 10.38	ext{ m} 	imes 2.82	ext{ m}$) wraz z 4 narożnymi bastionami pod koksowniki,
+  - Schody wejściowe Białych (południe) i Czarnych (północ),
+  - 4 koksowniki narożne na $X, Y = \pm 5.35	ext{ m}$ z animowanym ogniem,
+  - Gotyckie mury i bramy łukowe odsunięte na $X = \pm 10.50	ext{ m}$ (zapewniające ponad 4.5 m wolnej przestrzeni wokół planszy),
+  - **4 wielkie sztandary heraldyczne wiszące pionowo** wzdłuż ścian tuż za koksownikami.
   - Centralna platforma szachownicy,
   - Schody wejściowe Białych (południe) i Czarnych (północ),
   - 4 koksowniki narożne na $X, Y = \pm 5.35\text{ m}$,

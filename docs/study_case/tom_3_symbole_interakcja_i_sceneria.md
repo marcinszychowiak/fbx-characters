@@ -151,3 +151,48 @@ Zastosowano bezkompromisową, pewną metodę rektyfikacji geometrii:
 
 ### Podsumowanie lekcji z vibecodingu
 > **Wniosek:** AI asystent nowej generacji nie zatrzymuje się na pisaniu kodu tekstowego. Gdy pojawia się wąskie gardło budżetowe lub manualne (jak rigging siatek 3D czy kalibracja pivotów i wymiarów pól), agent przejmuje stery nad profesjonalnymi narzędziami inżynieryjnymi (Headless Blender), wykonując w tle godziny żmudnej pracy 3D artisty w kilkadziesiąt sekund. Zgrany tandem człowiek-AI pozwala w jeden wieczór zamknąć etapy produkcji, które dawniej wymagały całego studia deweloperskiego.
+
+
+---
+
+## Wpis 16: Zabudowa podmurówki szachownicy, pionowanie wielkich sztandarów heraldycznych oraz czarny rant PBR symboli 3D
+
+### 1. Diagnoza zrzutu ekranu z silnika gry
+Po zintegrowaniu wyeksportowanych assetów w silniku gry Twórca przekazał kluczowy zrzut ekranu wraz ze wskazówkami:
+> 1. *"Czy możemy ścianami zabudować pustą przestrzeń pod szachownicą?"* (na screenie widać lewitującą płytę szachownicy i ziejącą pustkę do poziomu posadzki lochów).
+> 2. *"Sztandary są za małe, do tego 'wiszą' poziomo, zamiast pionowo, ze ścian."* (sztandar wystawał poziomo pod sufitem niczym półka/deska).
+> 3. *"Wyświetlane symbole są też średnio widoczne - muszą mieć kontur. Proponuję czarny rant dookoła awersu i rewersu każdego symbolu."*
+
+### 2. Rozwiązania inżynieryjne w Blender Headless
+
+#### A. Masywna podmurówka kamienna pod szachownicą (`Arena_Chess_Podium`)
+- **Problem pustki:** Płyta szachownicy kończyła się na wysokości $Z = -0.393\text{ m}$, podczas gdy posadzka dolna lochów znajduje się na $Z = -3.20\text{ m}$. Pomiędzy nimi ziała próżnia o wysokości ponad $2.8\text{ m}$.
+- **Konstrukcja monolitu:** Wygenerowano kamienny monolit fundamentowy o wymiarach $10.38\text{ m} \times 10.38\text{ m} \times 2.82\text{ m}$ (od $Z = -3.20$ do $-0.38\text{ m}$), idealnie zamykający przestrzeń pod obramowaniem planszy.
+- **4 Bastiony narożne:** Pod każdym z 4 koksowników dodano pylon wsporczy ($1.90\text{ m} \times 1.90\text{ m}$ sięgający do $Z = 0.00\text{ m}$), tworząc spójną, gotycką fortecę pod szachownicę, w którą płynnie wchodzą kamienne schody z obu stron.
+- **Mapowanie UV:** Zastosowano sześcianowe rzutowanie tekstur (Cube UV Projection) z materiałem posadzki lochów (`dungeon_stone_mat`), eliminując jakiekolwiek szwy i rozciągnięcia.
+
+#### B. Pionowanie i skalowanie sztandarów heraldycznych
+- **Diagnoza osi wierzchołków:** W pliku źródłowym ze Sketchfaba (`sztandar.glb`) wierzchołki materiału zwisały wzdłuż osi Y ($Y \in [-7.07, 0.02]$), a grubość tkaniny biegła w osi Z ($Z \in [-0.01, 0.20]$). W świecie kartezjańskim (gdzie Z jest pionem) powodowało to, że sztandar leżał poziomo!
+- **Hierarchia i Quaterniony:** Obiekt `Sketchfab_model` posiadał wbudowany tryb `QUATERNION`. Bezpośrednie próby obrotu Eulera na węzłach potomnych były ignorowane.
+- **Rozwiązanie uchwytu ściennego (`WallMount`):** Stworzono dedykowane puste węzły nadrzędne z `rotation_mode = 'XYZ'`. Obrót o $+90^\circ$ w osi X obrócił wektor długości z osi Y na pionową oś Z ($Z \in [-1.07, 6.02]$ – zwis $7.10\text{ m}$!).
+- **Pozycjonowanie za koksownikami:** 4 wielkie sztandary (szerokość $1.61\text{ m}$, długość $7.10\text{ m}$, skala powiększona do $0.006$) zawieszono na ścianach bocznych tuż za koksownikami:
+  - Ściana Zachodnia ($X = -9.65\text{ m}$, $Y = \pm 5.35\text{ m}$, $Z = 6.00\text{ m}$, rotacja $(90^\circ, 0, 90^\circ)$ – lico zwrócone do środka sali).
+  - Ściana Wschodnia ($X = +9.65\text{ m}$, $Y = \pm 5.35\text{ m}$, $Z = 6.00\text{ m}$, rotacja $(90^\circ, 0, -90^\circ)$ – lico zwrócone do środka sali).
+- **Stand-alone model:** Samodzielny model `sztandar.glb` został również wyeksportowany z węzłem nadrzędnym `Sztandar_Heraldyczny_Pionowy`, dzięki czemu przy imporcie do dowolnego silnika od razu wisi pionowo w dół.
+
+#### C. Wyraziste symbole szachowe 3D z czarnym rantem PBR
+- **Problem kontrastu:** Jednokolorowe symbole zlewają się z polami szachownicy i postaciami jednostek przy różnych kątach oświetlenia.
+- **Konstrukcja 2 slotów materiałowych:**
+  - **Slot 0 (`Symbol_Faction_Face`):** Przypisany do przedniej i tylnej płaszczyzny symbolu (awers/rewers). Domyślnie złoty/heraldyczny, w grze dynamicznie podmieniany na kolor frakcji gracza.
+  - **Slot 1 (`Symbol_Black_Rim`):** Przypisany do zaokrąglonej krawędzi (bevel depth $0.015\text{ m}$) oraz ścianek bocznych (extrude depth $0.07\text{ m}$). Posiada głęboki czarny kolor PBR ($R=0.015, G=0.015, B=0.015$, Roughness 0.85).
+- **Efekt wizualny:** Symbole zyskały ostry, czytelny obrys (kontur) w stylu profesjonalnego UI/3D shaderów, zachowując fizyczne cieniowanie światła.
+- **Wygenerowane modele:**
+  - 6 modeli jednostkowych: `symbol_krol.glb`, `symbol_hetman.glb`, `symbol_wieza.glb`, `symbol_goniec.glb`, `symbol_skoczek.glb`, `symbol_pion.glb`.
+  - 1 paczka zbiorcza: `symbole_szachowe_3d.glb` (wszystkie 6 symboli w jednym pliku z zachowanymi obrysami).
+
+### 3. Zweryfikowane rendery podglądowe
+- `modeleBC/preview_arena_lochy_mecz.png` – Pełny kadr taktyczny z ukosa: szachownica spoczywa na potężnej kamiennej podmurówce, brak pustki, sztandary wiszą majestatycznie wzdłuż murów, ogień koksowników oświetla arenę.
+- `modeleBC/preview_arena_lochy_biale.png` – Widok od dołu schodów południowych: widoczna masywna podmurówka kamienna i pionowe sztandary heraldyczne na ścianach.
+- `modeleBC/preview_arena_lochy_detal.png` – Cinematic zbliżenie na narożny bastion z płonącym koksownikiem i płytę szachownicy.
+- `modeleBC/showcase_symbole_szachowe_3d.png` – Prezentacja 6 symboli z czarnym rantem.
+- `modeleBC/showcase_10_frakcji_kolory.png` – Podgląd 10 barw frakcyjnych w zestawieniu z czarnym obrysem.

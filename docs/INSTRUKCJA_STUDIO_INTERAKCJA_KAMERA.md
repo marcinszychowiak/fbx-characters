@@ -53,13 +53,19 @@ To samo, intuicyjne i bezpieczne zachowanie na myszce i ekranie dotykowym:
 
 ## 3. Zestaw Modeli Symboli 3D (`modeleBC/`)
 
-Wszystkie symbole są przygotowane w formacie glTF 2.0 (`.glb`), mają wysokość `0.40 m` i wycentrowany pivot `(0, 0, 0)`:
+Wszystkie symbole są przygotowane w formacie glTF 2.0 (`.glb`), mają wysokość `0.40 m`, wycentrowany pivot `(0, 0, 0)` oraz **podwójny slot materiałowy z kontrastowym czarnym rantem**:
 - `modeleBC/symbol_krol.glb` – Król (♔ / ♚)
 - `modeleBC/symbol_hetman.glb` – Hetman / Królowa (♕ / ♛)
 - `modeleBC/symbol_wieza.glb` – Wieża (♖ / ♜)
 - `modeleBC/symbol_goniec.glb` – Goniec (♗ / ♝)
 - `modeleBC/symbol_skoczek.glb` – Skoczek (♘ / ♞)
 - `modeleBC/symbol_pion.glb` – Pion (♙ / ♟)
+- `modeleBC/symbole_szachowe_3d.glb` – Paczka zbiorcza zawierająca wszystkie 6 symboli.
+
+### Budowa materiałowa symboli (Czarny Rant PBR dla kontrastu):
+Każdy model symbolu posiada dwa materiały:
+1. **Slot 0 (`Symbol_Faction_Face`):** Awers i rewers symbolu – podmieniany w kodzie na barwę danej frakcji (`factionColor`).
+2. **Slot 1 (`Symbol_Black_Rim`):** Krawędź fazowana (bevel) i ścianki boczne – głęboka matowa czerń, gwarantująca ostry kontur i 100% czytelność na dowolnym tle.
 
 ### Paleta Kolorów Frakcji (`FACTION_COLORS`):
 ```typescript
