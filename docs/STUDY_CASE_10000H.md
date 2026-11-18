@@ -302,5 +302,46 @@ W każdym koksowniku na wysokości $Z = 1.38\text{ m}$ silnik Three.js umieszcza
 
 ---
 
+## Wpis 14: Budowa modularnej areny lochów (Dungeon Arena) – Dwustronne kamienne schody, koksowniki w rogach i powiewające sztandary heraldyczne
+
+### 1. Cel: Monumentalna sala bitewna w klimacie lochów
+Zgodnie z wizją Twórcy szachownica BloodChess ($9.20\text{ m} \times 9.20\text{ m}$, platforma $10.40\text{ m} \times 10.40\text{ m}$) stanowi centralne, wyniesione podium bitewne. Zadaniem Architekta było stworzenie kompletnego, zintegrowanego środowiska 3D w oparciu o surowe assety z folderu oczekujących (`schody.glb`, `sztandar.glb`, `lochy_set.glb`):
+1. **Dwustronne kamienne schody** prowadzące na szachownicę z obu stron:
+   - Dla Białych (Rank 1 / Południe): opadające ku południowemu wejściu do lochów,
+   - Dla Czarnych (Rank 8 / Północ): opadające ku północnemu wejściu do lochów.
+2. **Koksowniki bojowe z animowanym ogniem** w 4 rogach platformy planszy.
+3. **Mroczne otoczenie lochów** z modułowych murów kamiennych (części pełne oraz z gotyckimi oknami), monumentalnymi portalami łukowymi i filarami wsporczymi.
+4. **Powiewające sztandary na ścianach (tuż za koksownikami)** – 4 sztandary z animacją kości, o neutralnej strukturze czystego płótna, przygotowane pod dynamiczne kolorowanie PBR barwami 10 frakcji oraz projekcję symboli bierek w Three.js.
+
+### 2. Wyzwania inżynieryjne i kalibracja przestrzenna
+- **Matematyczne dokowanie schodów (`schody.glb`):**
+  - Model kamiennych schodów z balustradami i łańcuchami ma szerokość $5.20\text{ m}$, długość biegu $7.135\text{ m}$ i spadek wysokości $3.00\text{ m}$.
+  - Wycentrowano oś poprzeczną $X$ do przedziału $[-2.60\text{ m}, +2.60\text{ m}]$, a górny podest wyrównano idealnie do poziomu planszy ($Z = 0.00\text{ m}$).
+  - Schody Białych osadzono przy $Y = -5.20\text{ m}$ z zejściem na południe ku $Y = -12.34\text{ m}$ ($Z = -3.00\text{ m}$).
+  - Schody Czarnych obrócono o $180^\circ$ i osadzono przy $Y = +5.20\text{ m}$ z zejściem na północ ku $Y = +12.34\text{ m}$ ($Z = -3.00\text{ m}$).
+  - Przestrzeń samej szachownicy pozostała w $100\%$ wolna i niezasłonięta.
+- **Modułowa architektura lochów (`lochy_set.glb`):**
+  - Wyizolowano poszczególne elementy modułowego zestawu: mur pełny ($13.18\text{ m}$), mur z oknem gotyckim ($13.18\text{ m}$), monumentalną bramę z łukiem ($13.18\text{ m}$), filary narożne ($1.52\text{ m} \times 11.02\text{ m}$) oraz płyty posadzkowe ($12.3\text{ m} \times 12.3\text{ m}$).
+  - Ściany boczne (wschodnia i zachodnia) odsunięto na bezpieczny dystans $X = \pm 8.50\text{ m}$, tworząc przestronną galerię wokół planszy.
+  - Na krańcach schodów ($Y = \pm 13.50\text{ m}$) postawiono potężne bramy łukowe, tworząc bramy wejściowe dla obu armii.
+  - Posadzka dolna sali została ułożona na poziomie $Z = -3.25\text{ m}$ (powierzchnia na $-3.00\text{ m}$), idealnie stykając się z najniższym stopniem schodów.
+- **Sztandary heraldyczne z animacją kości (`sztandar.glb`):**
+  - Surowy asset zawierał 10-kościowy szkielet animowany w pętli 60 klatek (`Banner_BonesAction_Object_6`) oraz zbędną siatkę `Icosphere`, która została usunięta.
+  - Wykalibrowano skalę do `0.0035` (szerokość $0.94\text{ m}$, długość zwisu $4.14\text{ m}$).
+  - Obrócono szkielet o $90^\circ$ w osi X, aby płótno wisiało pionowo wzdłuż muru.
+  - 4 sztandary zawieszono na wysokości $Z = 4.80\text{ m}$ bezpośrednio za koksownikami na ścianach bocznych ($X = \pm 8.35\text{ m}$, $Y = \pm 5.20\text{ m}$).
+  - Płótno zwisa do $Z \approx 0.73\text{ m}$, kąpiąc się w blasku ognia z koksowników ($Z = 1.45\text{ m}$).
+
+### 3. Nowe assety produkcyjne w `modeleBC/`
+1. `modeleBC/sceneria_lochy.glb` – Zintegrowana, zoptymalizowana arena lochów 3D gotowa do wczytania jednym wywołaniem `GLTFLoader` w Three.js (szachownica, 2x schody, 4x koksowniki, mury, bramy, filary, posadzka, 4x sztandary).
+2. `modeleBC/schody.glb` – Samodzielny, wycentrowany model kamiennych schodów ze zoptymalizowanym pivotem na krawędzi górnego podestu.
+3. `modeleBC/sztandar.glb` – Samodzielny model powiewającego sztandaru ze szkieletem i zapętloną animacją wiatru.
+4. Prezentacje wizualne:
+   - `modeleBC/preview_arena_lochy_mecz.png` – Kadr zablokowanej kamery meczowej (panoramiczny rzut taktyczny z góry).
+   - `modeleBC/preview_arena_lochy_biale.png` – Widok od dołu południowych schodów Białych patrząc w górę na arenę.
+   - `modeleBC/preview_arena_lochy_detal.png` – Cinematic zbliżenie: ogień koksownika, kamienny mur i powiewający sztandar.
+
+---
+
 ### Podsumowanie lekcji z vibecodingu
 > **Wniosek:** AI asystent nowej generacji nie zatrzymuje się na pisaniu kodu tekstowego. Gdy pojawia się wąskie gardło budżetowe lub manualne (jak rigging siatek 3D czy kalibracja pivotów i wymiarów pól), agent przejmuje stery nad profesjonalnymi narzędziami inżynieryjnymi (Headless Blender), wykonując w tle godziny żmudnej pracy 3D artisty w kilkadziesiąt sekund. Zgrany tandem człowiek-AI pozwala w jeden wieczór zamknąć etapy produkcji, które dawniej wymagały całego studia deweloperskiego.
