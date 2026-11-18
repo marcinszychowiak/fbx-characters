@@ -174,5 +174,29 @@ Dzięki temu cała hierarchia armii ogólnej (Król, Królowa, Skoczek, Goniec, 
 
 ---
 
+## Wpis 9: Pierwsza filmowa egzekucja Hetmana — choreografia takedownu Horda vs Syndykat (cutscenka w Blenderze & Three.js)
+
+### 1. Wizja Twórcy i Cel: Podgląd przed wdrożeniem
+W myśl nadrzędnej zasady projektowania gry, Twórca zgłosił zapotrzebowanie na przetestowanie i weryfikację wizualną pełnej sceny zabicia figury (takedownu) **zanim** kod Three.js zacznie przetwarzać ją w czasie rzeczywistym.
+Scenariusz testowy: **Zombie Hordy** dokonuje brutalnej egzekucji na **Hetmanie Syndykatu** (eleganckiej kobiecie w garniturze z koroną i sztyletem) na nowo wdrożonej marmurowej szachownicy z onyksu.
+
+### 2. Wyzwania inżynieryjne w Headless Pipeline:
+1. **Niewidzialność materiałów z importera FBX (Alpha = 0):**
+   Standardowy importer FBX w Blenderze 4.2 LTS po zaimportowaniu materiałów Principled BSDF ustawia domyślnie suwak `Alpha` na `0.0`. Powodowało to całkowitą przezroczystość postaci w silniku EEVEE Next. Agent zaimplementował w locie automatyczny skrypt naprawczy przechodzący po `bpy.data.materials` i korygujący `Alpha = 1.0` oraz tryb miksowania na `OPAQUE`.
+2. **Kompilacja wielościeżkowego Non-Linear Animation (NLA):**
+   Zamiast statycznych póz, zaaranżowano pełną choreografię filmową (105 klatek, 24 fps):
+   - **Klatki 1–24:** Szarża Zombie w stronę Hetmana (`Run`), Hetman stoi niewzruszona (`Idle`).
+   - **Klatki 25–40:** Potężny cios pięścią Zombie prosto w twarz/korpus (`Punch`), natychmiastowa reakcja Hetmana na uderzenie (`RecieveHit`).
+   - **Klatki 41–105:** Śmiertelne osuwanie się Hetmana i bezwładny upadek na marmurowe kafle (`Death`), podczas gdy Zombie unosi ramiona ku niebu w dzikim ryku triumfu (`Victory`).
+3. **Dynamiczna kamera i oświetlenie filmowe:**
+   Skonfigurowano kamerę 28mm z constraintem `TRACK_TO` śledzącym epicentrum starcia, z miękkim oświetleniem punktowym z góry i kontrowym światłem chłodnym, podkreślającym luksusowe żyłki marmuru i dramatyzm sceny.
+
+### 3. Rezultat i Artefakty
+Wygenerowano dwa kluczowe zasoby gotowe do natychmiastowego użycia:
+- **`modeleBC/horda_bije_hetmana_cutscene.mp4`** – Wyrenderowane wideo MP4 (H.264, 24 fps, 854x480), dające Twórcy 100% pewność co do tempa, dramaturgii i kompozycji uderzenia.
+- **`modeleBC/takedown_horda_syndykat.glb`** (9.8 MB) – Kompletna, animowana scena 3D glTF z siatkami, kośćmi i ścieżkami NLA, którą silnik WebGL gry może natychmiast odtworzyć w Three.js jako interaktywną cutscenkę.
+
+---
+
 ### Podsumowanie lekcji z vibecodingu
 > **Wniosek:** AI asystent nowej generacji nie zatrzymuje się na pisaniu kodu tekstowego. Gdy pojawia się wąskie gardło budżetowe lub manualne (jak rigging siatek 3D czy kalibracja pivotów i wymiarów pól), agent przejmuje stery nad profesjonalnymi narzędziami inżynieryjnymi (Headless Blender), wykonując w tle godziny żmudnej pracy 3D artisty w kilkadziesiąt sekund. Zgrany tandem człowiek-AI pozwala w jeden wieczór zamknąć etapy produkcji, które dawniej wymagały całego studia deweloperskiego.

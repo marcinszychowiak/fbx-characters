@@ -172,6 +172,10 @@ Katalog `modeleBC/` zawiera dedykowane modele 3D postaci frakcyjnych oraz kluczo
 ### Scenografia i Arena:
 - `plansza.glb` (alias: `luxury_onyx_and_marble_chess_board.glb`) – Luksusowy stół szachowy z polerowanego czarnego onyksu, białego marmuru i mosiężnego okuciu. Skalibrowany dokładnie pod silnik: 1 pole = `1.15 m` (szerokość 8x8 pól = `9.20 m`), wierzch kafelków dokładnie na `Y = 0`, z węzłami pomocniczymi `Board_Center`, `Tile_A1_Corner`, `Tile_H8_Corner`.
 
+### Animacje Cutscenek Takedownów i Zbić:
+- `horda_bije_hetmana_cutscene.mp4` – Wyrenderowana filmowa cutscenka wideo (H.264, 24 fps, 854x480) przedstawiająca sekwencję zbijania Hetmana Syndykatu przez Hordę (szarża, potężny cios pięścią, śmiertelny upadek Hetmana na marmur, okrzyk triumfu zombie).
+- `takedown_horda_syndykat.glb` – Kompletna, zintegrowana scena 3D glTF 2.0 (9.8 MB) zawierająca planszę, obie postacie ze szkieletami, rekwizyty i wielościeżkowe animacje NLA, gotowa do bezpośredniego odtworzenia w silniku Three.js gry.
+
 > [!NOTE]
 > **Wykorzystanie korony (`korona.glb`) w armii:**  
 > W obrębie danej armii model korony jest wykorzystywany **dwukrotnie** z odpowiednim skalowaniem w silniku gry:
