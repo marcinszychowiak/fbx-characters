@@ -184,6 +184,10 @@ Zestaw modeli 3D glTF 2.0 wygenerowanych z glifów Unicode (wysokość `0.40 m`,
 
 ### Scenografia i Arena:
 - `plansza.glb` (alias: `luxury_onyx_and_marble_chess_board.glb`) – Luksusowy stół szachowy z polerowanego czarnego onyksu, białego marmuru i mosiężnego okuciu. Skalibrowany dokładnie pod silnik: 1 pole = `1.15 m` (szerokość 8x8 pól = `9.20 m`), wierzch kafelków dokładnie na `Y = 0`, z węzłami pomocniczymi `Board_Center`, `Tile_A1_Corner`, `Tile_H8_Corner`.
+- `koksownik.glb` – Bojowy koksownik zamkowy (kamienny postument + mosiężna misa, wysokość 1.41 m, podstawa 0.79 m na Z=0, gniazdo `Socket_Flame` w misie na Z=1.22 m).
+- `ogien_do_koksownika.glb` – Wieloczęściowy, animowany ogień (192 niezależne meshe płomieni/iskier, zapętlona akcja 30 klatek, średnica 0.49 m, wysokość 0.64 m, punkt zaczepienia w Z=0).
+- `koksownik_z_ogniem.glb` – Kompletny, zintegrowany asset (koksownik + animowany ogień w misie, łączna wysokość 1.86 m). Rekomendowany do rozstawienia w 4 rogach szachownicy (`X, Z = ±5.20 m`).
+- `preview_koksownik_z_ogniem.png` – Wyrenderowana prezentacja wizualna płonącego koksownika na kamiennej posadzce w nastrojowym oświetleniu sali zamkowej.
 
 ### Animacje Cutscenek Takedownów i Zbić:
 - `horda_bije_hetmana_cutscene.mp4` – Wyrenderowana filmowa cutscenka wideo (H.264, 24 fps, 854x480) przedstawiająca sekwencję zbijania Hetmana Syndykatu przez Hordę (szarża, potężny cios pięścią, śmiertelny upadek Hetmana na marmur, okrzyk triumfu zombie).

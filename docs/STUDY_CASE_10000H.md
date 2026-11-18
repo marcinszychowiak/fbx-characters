@@ -272,5 +272,35 @@ Wszystkie te wytyczne wraz z gotową klasą `BloodChessInputController` zostały
 
 ---
 
+## Wpis 13: Opracowanie oświetlenia scenografii – Koksownik bojowy, animowany ogień (192 meshe) i kompozycja 4 narożników
+
+### 1. Cel: Bitewna atmosfera areny szachowej
+Szachownica BloodChess ($9.20\text{ m} \times 9.20\text{ m}$) potrzebowała klimatycznego oświetlenia otoczenia nawiązującego do mrocznej sali zamkowej / cytadeli. Twórca dostarczył surowe modele koksownika oraz wieloczęściowego ognia (`c:\Users\sbard\Downloads\bronie2`).
+
+### 2. Wyzwania inżynieryjne i kalibracja geometrii
+- **Koksownik (`koksownik.glb`):**
+  - Model składa się z solidnego kamiennego cokołu z pęknięciami (`Object_5`) oraz kutej, mosiężnej misy ze zwieńczeniem (`Object_4`).
+  - Surowy plik ze Sketchfab posiadał nadrzędny węzeł z niezerową skalą ($0.2326$). Po uwolnieniu relacji rodzic-dziecko (`CLEAR_KEEP_TRANSFORM`) i wypieczeniu transformacji siatki osadzono spód podstawy idealnie na $Z = 0.00\text{ m}$.
+  - Wymiary: podstawa o szerokości $0.79\text{ m}$, wysokość cokołu $1.145\text{ m}$, całkowita wysokość misy $1.413\text{ m}$.
+  - W centrum misy osadzono punkt pomocniczy `Socket_Flame` na wysokości $Z = 1.22\text{ m}$.
+- **Animowany ogień (`ogien_do_koksownika.glb`):**
+  - Ogień składa się ze 192 niezależnych, animowanych siatek płomieni i iskier w zapętlonej akcji 30 klatek.
+  - W skali 1:1 ogień miał aż $2.08\text{ m}$ średnicy i $2.73\text{ m}$ wysokości (zbyt potężny do koksownika).
+  - Skalibrowano skalę do `0.235` (średnica płomienia $\approx 0.49\text{ m}$, idealnie wpasowana w misę $0.50\text{ m}$).
+  - Skonfigurowano węzeł `Flame_Root` z przesunięciem $Z$, dzięki czemu punkt zaczepienia ognia znajduje się dokładnie na jego dolnej krawędzi $(0, 0, 0)$.
+  - Materiał `fire` otrzymał wzmocnioną emisję PBR (Emission Strength: 5.0, barwa soczystego pomarańczu/złota).
+- **Zintegrowany asset (`koksownik_z_ogniem.glb`):**
+  - Gotowy do natychmiastowego wstawienia do Three.js model 2w1 o całkowitej wysokości $1.86\text{ m}$, z płomieniem tańczącym $0.45\text{ m}$ ponad krawędzią misy.
+
+### 3. Zastosowanie w grze (Three.js / Studio):
+W 4 rogach planszy poza krawędzią pól ($X, Z = \pm 5.20\text{ m}$):
+- `Corner_TopLeft`: `(-5.20, 0, -5.20)`
+- `Corner_TopRight`: `(5.20, 0, -5.20)`
+- `Corner_BottomLeft`: `(-5.20, 0, 5.20)`
+- `Corner_BottomRight`: `(5.20, 0, 5.20)`
+W każdym koksowniku na wysokości $Z = 1.38\text{ m}$ silnik Three.js umieszcza `PointLight` o ciepłej barwie `0xff7722`, tworząc dynamiczne cienie figur na marmurowo-onyksowej planszy.
+
+---
+
 ### Podsumowanie lekcji z vibecodingu
 > **Wniosek:** AI asystent nowej generacji nie zatrzymuje się na pisaniu kodu tekstowego. Gdy pojawia się wąskie gardło budżetowe lub manualne (jak rigging siatek 3D czy kalibracja pivotów i wymiarów pól), agent przejmuje stery nad profesjonalnymi narzędziami inżynieryjnymi (Headless Blender), wykonując w tle godziny żmudnej pracy 3D artisty w kilkadziesiąt sekund. Zgrany tandem człowiek-AI pozwala w jeden wieczór zamknąć etapy produkcji, które dawniej wymagały całego studia deweloperskiego.
