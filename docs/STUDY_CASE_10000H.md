@@ -343,5 +343,38 @@ Zgodnie z wizją Twórcy szachownica BloodChess ($9.20\text{ m} \times 9.20\text
 
 ---
 
+## Wpis 15: Korekta przestrzenna areny lochów – Diagnoza trybu obrotu Quaternion i uwolnienie pola widzenia szachownicy
+
+### 1. Problem zgłoszony przez Twórcę
+Po wstępnym wygenerowaniu scenerii lochów Twórca słusznie zauważył:
+> *"Ogólnie super, ale te ścianki tuż przy szachownicy zasłaniają planszę."*
+
+Podczas inspekcji rzutu kamery meczowej okazało się, że boczne fragmenty kamiennego muru faktycznie wchodziły w pole widzenia narożnych pól planszy, przeszkadzając w komfortowej obserwacji rozgrywki i potencjalnie myląc graczy.
+
+### 2. Śledztwo techniczne: Dlaczego mury weszły na planszę?
+Analiza skryptowa w headless Blenderze ujawniła podwójną przyczynę:
+1. **Ukryty tryb rotacji `QUATERNION` w zaimportowanym glTF:**
+   Wszystkie siatki wyodrębnione z surowego `lochy_set.glb` miały ustawiony `rotation_mode = 'QUATERNION'`. Kiedy skrypt przypisywał `new_obj.rotation_euler = (0, 0, rot_z)`, Blender po cichu ignorował wartości Eulera, ponieważ obiekt był sterowany kwaternionem!
+2. **Skutek w geometrii:**
+   Mury boczne, które miały biec wzdłuż osi Y (długość $13.18\text{ m}$), pozostały zorientowane wzdłuż osi X ($dX = 13.18\text{ m}$, $dY = 1.54\text{ m}$). Z powodu umieszczenia ich na $X = \pm 8.50\text{ m}$, ich wierzchołki rozciągały się w przedziale $X \in [-15.09, -1.91]$ oraz $X \in [1.91, 15.09]$ – dosłownie tnąc planszę (która ma krawędź na $X = \pm 5.20\text{ m}$) aż do $X = \pm 1.91\text{ m}$!
+
+### 3. Wprowadzone rozwiązanie inżynieryjne
+Zastosowano bezkompromisową, pewną metodę rektyfikacji geometrii:
+1. **Permanentna rotacja wierzchołków na poziomie siatki (Mesh Vertex Baking):**
+   Zamiast polegać na rotacji kontenera obiektu, stworzono zrotowaną kopię siatki `make_rotated_copy()`, bezpośrednio obracając współrzędne wierzchołków ($x' = x \cos \alpha - y \sin \alpha$, $y' = x \sin \alpha + y \cos \alpha$). W ten sposób mur ma długość $13.18\text{ m}$ permanentnie wzdłuż osi Y bez potrzeby rotacji obiektu.
+2. **Wymuszenie `rotation_mode = 'XYZ'`:**
+   Wszystkim obiektom w scenie narzucono explicite kartezjański tryb Eulera.
+3. **Odsunięcie ścian bocznych na $X = \pm 10.50\text{ m}$:**
+   Mury zachodnie ($X = -10.50\text{ m}$) i wschodnie ($X = +10.50\text{ m}$) zostały odsunięte o dodatkowe $2.0\text{ m}$ na zewnątrz.
+   - Pomiędzy krawędzią szachownicy ($X = \pm 5.20\text{ m}$) a wewnętrznym licem murów ($X = \pm 9.73\text{ m}$) powstał szeroki, monumentalny korytarz o szerokości ponad **$4.5\text{ m}$**.
+   - Sztandary heraldyczne powieszono na ścianach na $X = \pm 9.70\text{ m}$, obrócone przodem do środka sali.
+   - Koksowniki w 4 rogach ($X = \pm 5.35\text{ m}$, $Y = \pm 5.35\text{ m}$) płoną swobodnie na krawędzi podestu, nie dotykając żadnych ścian.
+4. **Kalibracja kamery meczowej (`Cam_Match`):**
+   Kamerę taktyczną ustawiono na $(0.0, -10.5, 11.2)$, z ogniskową $30\text{ mm}$ i śledzeniem środka planszy $(0, 0, 0.2)$.
+   - Wszystkie 64 pola szachownicy (A1–H8) są w 100% widoczne, bez ani jednego cienia czy fragmentu muru w kadrze.
+   - Gotyckie ściany i filary tworzą majestatyczne tło po bokach ekranu, budując głębię lochów bez naruszania czytelności gameplayu.
+
+---
+
 ### Podsumowanie lekcji z vibecodingu
 > **Wniosek:** AI asystent nowej generacji nie zatrzymuje się na pisaniu kodu tekstowego. Gdy pojawia się wąskie gardło budżetowe lub manualne (jak rigging siatek 3D czy kalibracja pivotów i wymiarów pól), agent przejmuje stery nad profesjonalnymi narzędziami inżynieryjnymi (Headless Blender), wykonując w tle godziny żmudnej pracy 3D artisty w kilkadziesiąt sekund. Zgrany tandem człowiek-AI pozwala w jeden wieczór zamknąć etapy produkcji, które dawniej wymagały całego studia deweloperskiego.

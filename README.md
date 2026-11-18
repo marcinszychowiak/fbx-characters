@@ -184,13 +184,13 @@ Zestaw modeli 3D glTF 2.0 wygenerowanych z glifów Unicode (wysokość `0.40 m`,
 
 ### Scenografia i Arena:
 - `sceneria_lochy.glb` – **Kompletna arena lochów 3D (35 MB)**: Zintegrowane, gotowe do natychmiastowego wczytania w Three.js środowisko bitewne zawierające:
-  - Centralną, wyniesioną szachownicę ($9.20\text{ m} \times 9.20\text{ m}$),
+  - Centralną, wyniesioną szachownicę ($9.20\text{ m} \times 9.20\text{ m}$, platforma $10.40\text{ m} \times 10.40\text{ m}$),
   - Dwustronne kamienne schody wejściowe ($5.20\text{ m}$ szerokości) ze spadkiem na poziom podłogi lochu ($Z = -3.00\text{ m}$) dla armii Białych (południe) i Czarnych (północ),
-  - 4 koksowniki z płonącym ogniem w rogach platformy planszy,
-  - Modularne mury kamienne lochów (części pełne oraz z gotyckimi oknami),
-  - Północny i południowy portal wejściowy z monumentalnymi łukami kamiennymi,
+  - 4 koksowniki z płonącym ogniem w rogach platformy planszy ($X, Y = \pm 5.35\text{ m}$),
+  - Modularne mury kamienne lochów odsunięte na bezpieczny dystans $X = \pm 10.50\text{ m}$ (tworząc szerokie, ponad 4.5-metrowe wolne korytarze boczne gwarantujące $100\%$ czyste, niezasłonięte pole widzenia szachownicy z każdego kąta kamery),
+  - Północny i południowy portal wejściowy z monumentalnymi łukami kamiennymi ($Y = \pm 13.50\text{ m}$),
   - 6 masywnych filarów narożnych i międzymurowych,
-  - 4 powiewające sztandary heraldyczne (animacja szkieletowa 60 klatek) wiszące na murach tuż za koksownikami – neutralne, gotowe pod przypisanie kolorów frakcji i nałożenie symboli bierek w Three.js.
+  - 4 powiewające sztandary heraldyczne (animacja szkieletowa 60 klatek) wiszące na murach tuż za koksownikami na $X = \pm 9.70\text{ m}$ – neutralne, gotowe pod przypisanie kolorów frakcji i nałożenie symboli bierek w Three.js.
 - `schody.glb` – Samodzielny model kamiennych schodów (szerokość $5.20\text{ m}$, długość $7.14\text{ m}$, spadek $3.00\text{ m}$) z wycentrowaną osią X i pivotem na krawędzi górnego podestu.
 - `sztandar.glb` – Samodzielny model powiewającego sztandaru heraldycznego (szkielet z 10 kośćmi, zapętlona akcja wiatru 60 klatek, skala metryczna: szerokość $0.94\text{ m}$, zwis $4.14\text{ m}$).
 - `plansza.glb` (alias: `luxury_onyx_and_marble_chess_board.glb`) – Luksusowy stół szachowy z polerowanego czarnego onyksu, białego marmuru i mosiężnego okuciu. Skalibrowany dokładnie pod silnik: 1 pole = `1.15 m` (szerokość 8x8 pól = `9.20 m`), wierzch kafelków dokładnie na `Y = 0`, z węzłami pomocniczymi `Board_Center`, `Tile_A1_Corner`, `Tile_H8_Corner`.
