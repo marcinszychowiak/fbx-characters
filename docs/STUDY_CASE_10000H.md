@@ -250,5 +250,27 @@ Wyeksportowano zestaw modeli do `modeleBC/`:
 
 ---
 
+## Wpis 12: Standard interakcji Double-Tap (PC & Mobile), rygor kamery meczowej i warunkowa asysta trudności (Easy)
+
+### 1. Przełom w ergonomii: Unifikacja PC i Mobile (Double-Tap)
+Twórca podjął kluczową decyzję projektową dotyczącą interfejsu: **zarówno na komputerze (myszka), jak i na telefonie (ekran dotykowy) obowiązuje identyczny, dwuetapowy model interakcji (*Double-Tap / Two-Click*)**:
+- **Pierwszy tap:** Czysta inspekcja i przygotowanie – dotknięcie własnej bierki podnosi nad nią lewitujący symbol 3D w kolorze armii i podświetla legalne ruchy. Dotknięcie wrogiej bierki podnosi jej symbol 3D w barwach wroga i **nigdy nie powoduje przypadkowego ruchu ani straty figury**.
+- **Drugi tap:** Potwierdzenie intencji – dotknięcie podświetlonego kafelka / wrogiej figury w zasięgu aktywuje ruch lub animację takedownu.
+
+### 2. Balans rozgrywki: Zasięg rażenia wroga (Threat Range) wyłącznie w Easy Mode
+Częstym problemem w grach szachowych jest przeciążenie wzrokowe gracza zbyt dużą liczbą podpowiedzi. Zgodnie z wytyczną Twórcy:
+- **Tryb Łatwy (Easy vs SI):** Po kliknięciu wrogiej bierki plansza podświetla na czerwono pola, które ta jednostka aktualnie kontroluje (świetna asysta dla początkujących).
+- **Tryb Normalny, Trudny i PvP:** Podświetlenie zagrożeń wroga jest zablokowane. Gracz widzi symbol 3D roli (rozwiewający wątpliwość np. Goniec vs Pion), lecz pełną kalkulację taktyczną musi przeprowadzić samodzielnie.
+
+### 3. Sztywna blokada kamery meczowej (Locked Camera Rig)
+Na urządzeniach mobilnych obracanie kamery gestem dotykowym w trakcie partii prowadzi do frustrujących pomyłek (obrót sceny zamiast kliknięcia pionka).
+Wprowadzono dedykowany rig kamery:
+- Po rozpoczęciu meczu kontrolery orbitalne (*OrbitControls*) zostają wyłączone na czas partii.
+- Kamera przyjmuje stały, panoramiczny kąt taktyczny ($FOV = 42^\circ$, `position: (0, 7.8, 8.2)`, `lookAt: (0, 0, -0.4)` dla Białych; obrót $180^\circ$ dla Czarnych), obejmujący w pełni całą planszę $9.20\text{ m} \times 9.20\text{ m}$ z idealnym zachowaniem czytelności figur.
+
+Wszystkie te wytyczne wraz z gotową klasą `BloodChessInputController` zostały skompilowane w dedykowany dokument produkcyjny: `docs/INSTRUKCJA_STUDIO_INTERAKCJA_KAMERA.md`.
+
+---
+
 ### Podsumowanie lekcji z vibecodingu
 > **Wniosek:** AI asystent nowej generacji nie zatrzymuje się na pisaniu kodu tekstowego. Gdy pojawia się wąskie gardło budżetowe lub manualne (jak rigging siatek 3D czy kalibracja pivotów i wymiarów pól), agent przejmuje stery nad profesjonalnymi narzędziami inżynieryjnymi (Headless Blender), wykonując w tle godziny żmudnej pracy 3D artisty w kilkadziesiąt sekund. Zgrany tandem człowiek-AI pozwala w jeden wieczór zamknąć etapy produkcji, które dawniej wymagały całego studia deweloperskiego.

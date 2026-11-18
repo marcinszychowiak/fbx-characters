@@ -211,6 +211,7 @@ Katalog `Soundtrack/` gromadzi utwory muzyczne (BGM) dla gry **BloodChess**:
 
 ## Dokumentacja Projektowa i Roadmapa (`docs/`)
 
+- [`docs/INSTRUKCJA_STUDIO_INTERAKCJA_KAMERA.md`](docs/INSTRUKCJA_STUDIO_INTERAKCJA_KAMERA.md) – **Instrukcja dla Studio**: Implementacja systemu Double-Tap (PC & Mobile), sztywna blokada kamery meczowej, obsługa symboli 3D oraz warunek poziomu trudności (zasięg rażenia wroga tylko w trybie Easy vs SI).
 - [`docs/INSTRUKCJA_MODELI_3D.md`](docs/INSTRUKCJA_MODELI_3D.md) – **Instrukcja przygotowania i dopasowania modeli 3D**: standardy przestrzeni, system socketów (`Socket_Crown`, `Socket_Hand_R`, `Socket_Rider`), obsługa wariantów jeźdźców oraz strategie pracy z generatorami AI (Tripo.AI) i Blenderem.
 - [`docs/ROADMAP_ASSETOW_3D.md`](docs/ROADMAP_ASSETOW_3D.md) – **Kompleksowy rejestr i mapa drogowa migracji**: lista elementów 3D generowanych obecnie proceduralnie w Three.js (`pieceBuilder.ts`, `queenCutsceneDirector.ts`, `ChessSceneManager.ts`) z priorytetami podmiany na docelowe modele `.glb`.
 - [`docs/DOKUMENT_TECHNOLOGICZNY.md`](docs/DOKUMENT_TECHNOLOGICZNY.md) – Zrozumiałe uzasadnienie doboru formatów (FBX, GLB, WAV 48k, MP3, Markdown/JSON, Git).
