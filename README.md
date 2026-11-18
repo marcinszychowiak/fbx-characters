@@ -170,6 +170,17 @@ Katalog `modeleBC/` zawiera dedykowane modele 3D postaci frakcyjnych oraz kluczo
 ### Efekty VFX i Mocy Specjalnej:
 - `specialpower.glb` – Animowany pionowy słup pulsujących pierścieni energii/aury podczas aktywacji mocy specjalnej (wysokość `2.10 m`, dno na poziomie ziemi `Z = 0`, 4 zintegrowane animacje Take 001). Tymczasowo wspólny dla wszystkich armii, docelowo zindywidualizowany per frakcja.
 
+### Trójwymiarowe Symbole Rang Szachowych (Lewitujące wskaźniki zaznaczenia):
+Zestaw modeli 3D glTF 2.0 wygenerowanych z glifów Unicode (wysokość `0.40 m`, pivot w geometrycznym środku `0, 0, 0`, fazowane krawędzie, materiał PBR przystosowany do dynamicznego barwienia kolorem armii):
+- `symbol_krol.glb` – Symbol Króla (♔ / ♚)
+- `symbol_hetman.glb` – Symbol Hetmana / Królowej (♕ / ♛)
+- `symbol_wieza.glb` – Symbol Wieży (♖ / ♜)
+- `symbol_goniec.glb` – Symbol Gońca (♗ / ♝)
+- `symbol_skoczek.glb` – Symbol Skoczka (♘ / ♞)
+- `symbol_pion.glb` – Symbol Piona (♙ / ♟)
+- `symbole_szachowe_3d.glb` – Paczka zbiorcza ze wszystkimi 6 symbolami.
+- `showcase_symbole_szachowe_3d.png` – Prezentacja wizualna symboli z oświetleniem w kolorach frakcji.
+
 ### Scenografia i Arena:
 - `plansza.glb` (alias: `luxury_onyx_and_marble_chess_board.glb`) – Luksusowy stół szachowy z polerowanego czarnego onyksu, białego marmuru i mosiężnego okuciu. Skalibrowany dokładnie pod silnik: 1 pole = `1.15 m` (szerokość 8x8 pól = `9.20 m`), wierzch kafelków dokładnie na `Y = 0`, z węzłami pomocniczymi `Board_Center`, `Tile_A1_Corner`, `Tile_H8_Corner`.
 

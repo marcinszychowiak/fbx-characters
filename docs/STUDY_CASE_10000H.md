@@ -228,5 +228,27 @@ Agent przeprowadził dekonstrukcję łańcucha kostnego i siatki wierzchołków:
 
 ---
 
+## Wpis 11: Trójwymiarowe runy rangowe bierek — generowanie lewitujących symboli Unicode (glTF PBR) z dynamicznym barwieniem frakcyjnym
+
+### 1. Geneza potrzeby UX: Natychmiastowa czytelność na polu bitwy
+W grze z 10 unikalnymi armiami i 60 zróżnicowanymi modelami wojowników natychmiastowa identyfikacja roli szachowej (Król, Hetman, Wieża, Goniec, Skoczek, Pion) w ferworze walki jest kluczowa dla komfortu gracza.
+Twórca zaproponował genialny w swej prostocie mechanizm: **po kliknięciu danej bierki, nad jej głową pojawia się trójwymiarowy, obracający się i lewitujący symbol szachowy w barwach przynależnej armii**.
+
+### 2. Realizacja w Headless Blenderze (Vector Font to 3D PBR Mesh):
+Agent natychmiast przekształcił wektorowe glify Unicode z systemowej biblioteki krojów pisma (`Segoe UI Symbol` U+265A do U+265F) w pełnoprawne, zoptymalizowane bryły 3D:
+1. **Modelowanie i Bevel:** Każdemu symbolowi nadano grubość 4 cm oraz 3-stopniowe fazowanie krawędzi (Bevel), dzięki czemu symbole chwytają refleksy światła i prezentują się jak szlachetne insygnia królewskie.
+2. **Kalibracja pivotu i skali:**
+   - Wysokość każdego znaku znormalizowano precyzyjnie do **0.40 m** (40 cm) – idealnej proporcji nad głowę figury.
+   - Środek ciężkości (Origin) wycentrowano idealnie w geometrycznym środku `(0, 0, 0)`, umożliwiając bezproblemową rotację wokół własnej osi bez efektu bicia czy mimośrodu.
+3. **Materiały PBR zoptymalizowane pod Three.js:** Nadano materiał metaliczny z emisyjnym blaskiem, który w silniku gry może być dynamicznie barwiony jednym poleceniem (`material.color.setHex(armyColor)` / `material.emissive.setHex(armyColor)`).
+
+### 3. Wdrożenie i Artefakty
+Wyeksportowano zestaw modeli do `modeleBC/`:
+- `symbol_krol.glb` (Król), `symbol_hetman.glb` (Hetman), `symbol_wieza.glb` (Wieża), `symbol_goniec.glb` (Goniec), `symbol_skoczek.glb` (Skoczek), `symbol_pion.glb` (Pion) oraz paczkę zbiorczą `symbole_szachowe_3d.glb`.
+- Wyrenderowano planszę poglądową `modeleBC/showcase_symbole_szachowe_3d.png` prezentującą symbole w pełnej palecie frakcyjnej (złoto, karmazyn, szmaragd, szafir, ametyst, bursztyn).
+- Opracowano gotowy moduł TypeScript do obsługi kliknięcia, lewitacji i rotacji w Three.js.
+
+---
+
 ### Podsumowanie lekcji z vibecodingu
 > **Wniosek:** AI asystent nowej generacji nie zatrzymuje się na pisaniu kodu tekstowego. Gdy pojawia się wąskie gardło budżetowe lub manualne (jak rigging siatek 3D czy kalibracja pivotów i wymiarów pól), agent przejmuje stery nad profesjonalnymi narzędziami inżynieryjnymi (Headless Blender), wykonując w tle godziny żmudnej pracy 3D artisty w kilkadziesiąt sekund. Zgrany tandem człowiek-AI pozwala w jeden wieczór zamknąć etapy produkcji, które dawniej wymagały całego studia deweloperskiego.
