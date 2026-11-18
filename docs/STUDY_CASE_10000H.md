@@ -198,5 +198,35 @@ Wygenerowano dwa kluczowe zasoby gotowe do natychmiastowego użycia:
 
 ---
 
+## Wpis 10: Anatomiczna kalibracja skal bierek w silniku — od Goblinów (70 cm) po Wikingów (215 cm) oraz rozwiązanie zagadki przysiadu Ninja
+
+### 1. Diagnoza wizualna: Pułapka normalizacji modeli AI
+Wszystkie surowe assety wygenerowane przez Tripo.AI zostały domyślnie znormalizowane do identycznej wysokości wierzchołkowej $1.00\text{ m}$ (100 cm). Po zaimportowaniu ich do silnika ze stałym mnożnikiem skali pojawiły się kuriozalne dysproporcje:
+- **Goblin:** mający w założeniach fabularnych zaledwie 70 cm wzrostu, w silniku miał rozmiary dorosłego człowieka (~180 cm)!
+- **Wiking:** potężny barbarzyńca o wzroście 215 cm wyglądał na przysadzistego i mniejszego od żołnierzy.
+- **Ninja:** kluczowy problem biomechaniczny – model został wygenerowany w głębokim przysiadzie bojowym (*kiba-dachi*, rozstaw stóp 0.84 m, ugięcie kolan ~40°). Proste przeskalowanie go do 175 cm sprawiłoby, że po wyprostowaniu miałby ponad 2.07 m wzrostu, a jego głowa i dłonie byłyby karykaturalnie wielkie!
+
+### 2. Matematyczne opracowanie geometrii przysiadu Ninja
+Agent przeprowadził dekonstrukcję łańcucha kostnego i siatki wierzchołków:
+1. Dla człowieka o wzroście wyprostowanym 175 cm:
+   - Nogi (od podłoża do panewki miednicy): ~85 cm,
+   - Tułów + głowa: ~90 cm.
+2. W szerokim rozstawie stóp (0.84 m) i ugięciu kolan o 40°:
+   - Wysokość miednicy obniża się z 85 cm do ~60 cm (spadek o 25 cm).
+   - Lekkie pochylenie tułowia w pozie szermierczej skraca rzut pionowy o kolejne ~8 cm.
+   - Prawdziwy wzrost wojownika w tym przysiadzie wynosi **142 cm** (1.42 m).
+3. Wyznaczenie mnożnika dla modelu:
+   - Model `klan.glb` ma bazową wysokość siatki $0.9614\text{ m}$.
+   - Aby proporcje anatomiczne (wielkość czaszki, długość rąk, szerokość klatki) odpowiadały człowiekowi o wzroście 175 cm, model musi zostać przeskalowany o współczynnik:
+     $$\text{Scale} = \frac{1.42\text{ m}}{0.9614\text{ m}} \approx \mathbf{1.48}$$
+   Dzięki temu stojąc w przysiadzie, jego głowa znajduje się na poziomie 1.42 m, a jego ciało ma idealnie naturalne proporcje w zestawieniu z resztą armii!
+
+### 3. Weryfikacja w Headless Blenderze i aliasy plików
+- Wyrenderowano wzorcową planszę porównawczą `modeleBC/proponowane_skale_studio.png` z liniami odniesienia wysokości (0.70 m – 2.15 m).
+- Zarejestrowano pełną tabelę skal metrycznych oraz znormalizowanych do wdrożenia w kodzie Three.js Studio.
+- Utworzono aliasy nazw angielskich (`vikings.glb`, `crusaders.glb`, `undead.glb`, etc.), gwarantując 100% kompatybilność z dowolną konwencją nazewniczą w silniku gry.
+
+---
+
 ### Podsumowanie lekcji z vibecodingu
 > **Wniosek:** AI asystent nowej generacji nie zatrzymuje się na pisaniu kodu tekstowego. Gdy pojawia się wąskie gardło budżetowe lub manualne (jak rigging siatek 3D czy kalibracja pivotów i wymiarów pól), agent przejmuje stery nad profesjonalnymi narzędziami inżynieryjnymi (Headless Blender), wykonując w tle godziny żmudnej pracy 3D artisty w kilkadziesiąt sekund. Zgrany tandem człowiek-AI pozwala w jeden wieczór zamknąć etapy produkcji, które dawniej wymagały całego studia deweloperskiego.

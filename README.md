@@ -131,20 +131,21 @@ Katalog `modeleBC/` zawiera dedykowane modele 3D postaci frakcyjnych oraz kluczo
 > - `Socket_Rider` – punkt siodła w `kon.glb` oraz podestu w `wieza.glb`.  
 > Siatki zostały zoptymalizowane do poziomu ~20 000 trójkątów per model (rozmiar każdego pliku zredukowany z ~15 MB do ok. 1.3 MB), co zapewnia natychmiastowe ładowanie i płynne 60 fps.
 
-### Lista modeli:
-- `goblin.glb` – Sabat Goblinów (Humanoid Rig + Sockets)
-- `horda.glb` – Horda (Humanoid Rig + Sockets)
-- `klan.glb` – Klan Krwawego Cienia (Humanoid Rig + Sockets)
+### Lista modeli (wraz z aliasami angielskimi dla Studio):
+- `goblin.glb` (alias: `goblins.glb`) – Sabat Goblinów (Humanoid Rig + Sockets, wzrost: 70 cm)
+- `horda.glb` (alias: `undead.glb`) – Horda (Humanoid Rig + Sockets, wzrost: 180 cm)
+- `klan.glb` (alias: `ninjas.glb`) – Klan Krwawego Cienia (Humanoid Rig + Sockets, wzrost: 175 cm wyprostowany / 142 cm w przysiadzie)
 - `kon.glb` – Koń / Skoczek bitewny (`Socket_Rider` w siodle)
-- `korsarz.glb` – Korsarze (Humanoid Rig + Sockets)
-- `kowboj.glb` – Kowboj (Humanoid Rig + Sockets)
-- `najemnicy.glb` – Najemnicy (Humanoid Rig + Sockets)
-- `rzeznik.glb` – Rzeźnia (Humanoid Rig + Sockets)
-- `Syndykat.glb` – Syndykat (Humanoid Rig + Sockets)
+- `korsarz.glb` (alias: `pirates.glb`) – Korsarze (Humanoid Rig + Sockets, wzrost: 180 cm)
+- `kowboj.glb` (alias: `cowboys.glb`) – Kowboj (Humanoid Rig + Sockets, wzrost: 180 cm)
+- `najemnicy.glb` (alias: `soldiers.glb`) – Najemnicy (Humanoid Rig + Sockets, wzrost: 190 cm)
+- `rzeznik.glb` (alias: `butchers.glb`) – Rzeźnia (Humanoid Rig + Sockets, wzrost: 160 cm)
+- `Syndykat.glb` (alias: `mafia.glb`) – Syndykat (Humanoid Rig + Sockets, wzrost: 170 cm)
 - `wieza.glb` – Wieża / Podstawa wieży (`Socket_Rider` na platformie)
-- `wiking.glb` – Wikingowie z krwawego fiordu (Humanoid Rig + Sockets)
-- `zakon.glb` – Zakon (Humanoid Rig + Sockets)
+- `wiking.glb` (alias: `vikings.glb`) – Wikingowie z krwawego fiordu (Humanoid Rig + Sockets, wzrost: 215 cm)
+- `zakon.glb` (alias: `crusaders.glb`) – Zakon (Humanoid Rig + Sockets, wzrost: 190 cm)
 - `korona.glb` – Korona / Atrybut królewski (dolna obręcz wycentrowana na `(0, 0, 0)`)
+- `proponowane_skale_studio.png` – Plansza referencyjna skali z siatką wysokości (0.70 m – 2.15 m).
 
 ### Dedykowane uzbrojenie i ekwipunek ról (Grip Origin w `0, 0, 0`):
 - `miecz_krola.glb` – Miecz królewski (prawa dłoń Króla, chwyt rękojeści z jelcem w `Z = 0`)
