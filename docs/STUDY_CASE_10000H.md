@@ -154,5 +154,25 @@ Wyeksportowano gotowy do użycia model `modeleBC/plansza.glb` (oraz alias `luxur
 
 ---
 
+## Wpis 8: Armia Ogólna i Wizualny Przełom — wdrożenie zestawu ról, nakryć głowy, cokołu i mocy specjalnej
+
+### 1. Pakiet zasobów z linii frontu
+Twórca przekazał kolejny bogaty pakiet assetów (`bronie2`), zamykający dwie kluczowe luki w prototypie silnika:
+- **Wyposażenie ról specjalnych:** lewa ręka Gońca (`kielich_gonca.glb`), prawa ręka Wieży (`mlot_wiezy.glb`) oraz lewa ręka Wieży (`pawez_wiezy.glb`).
+- **Identyfikacja hierarchii figur:** rzeźbiony kamienny cokół bitewny (`podstawka.glb`) oraz dedykowane nakrycia głowy (`czepiec_wiezy.glb`, `czapka_gonca.glb`, `kita_skoczka.glb`).
+- **Nowa mechanika rozgrywki — Efekt Mocy Specjalnej:** animowany słup energetyczny VFX (`specialpower.glb`), tworzący uniwersalną bazę pod przyszłe unikalne moce frakcyjne.
+- **Arsenał broni frakcyjnych:** zdeponowano i zinwentaryzowano broń dla kolejnego etapu (topory wikingów, karabin Springfield, rewolwer, Tommy Gun, zakrwawiona maczuga).
+
+### 2. Wyzwania inżynieryjne: Ukryte macierze, skala i optymalizacja
+Surowe modele pochodzące z różnych bibliotek charakteryzowały się drastycznie odmiennymi układami odniesienia:
+1. **Cokół bitewny (drastyczna optymalizacja wagi):** Model podstawki posiadał aż 124 644 ścianek (5.1 MB) i środek geometryczny przesunięty o -26.7 m. Headless Blender wycentrował bryłę w `(0, 0)`, osadził spód idealnie na `Z = 0`, przeskalował średnicę do `0.95 m` (pod pole szachowe `1.15 m`) oraz zastosował modyfikator Decimate, zmniejszając polycount do 4 361 ścianek i wagę pliku do zaledwie **246 KB** (redukcja o ponad 95%).
+2. **Ukryte hierarchie w pawęży:** Płyta tarczy posiadała w węzłach pośrednich skalę $100\times$, a rzemienie uchwytu $0.0347\times$. Agent zaimplementował funkcję `bake_mesh_transforms`, wypiekającą przekształcenia bezpośrednio do geometrii świata, a następnie wycentrował wewnętrzny uchwyt w `(0, 0, 0)` na wysokości dłoni `Socket_Hand_L`.
+3. **Kielich i Młot:** Wyzerowano punkty chwytu (`Grip Origin`) na nóżce kielicha oraz rękojeści młota (`Grip`), eliminując lewitowanie lub zniekształcenia chwytu.
+4. **Animowany słup energii (VFX):** Przeskalowano efekt z 0.54 m do 2.10 m (aby otaczał postać o wzroście 1.8 m), zachowując wszystkie 4 zintegrowane ścieżki animacji glTF (`Take 001`).
+
+Dzięki temu cała hierarchia armii ogólnej (Król, Królowa, Skoczek, Goniec, Wieża) dysponuje kompletnym zestawem uzbrojenia, pancerza i nakryć głowy w formacie glTF 2.0.
+
+---
+
 ### Podsumowanie lekcji z vibecodingu
 > **Wniosek:** AI asystent nowej generacji nie zatrzymuje się na pisaniu kodu tekstowego. Gdy pojawia się wąskie gardło budżetowe lub manualne (jak rigging siatek 3D czy kalibracja pivotów i wymiarów pól), agent przejmuje stery nad profesjonalnymi narzędziami inżynieryjnymi (Headless Blender), wykonując w tle godziny żmudnej pracy 3D artisty w kilkadziesiąt sekund. Zgrany tandem człowiek-AI pozwala w jeden wieczór zamknąć etapy produkcji, które dawniej wymagały całego studia deweloperskiego.

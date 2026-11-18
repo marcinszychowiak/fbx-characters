@@ -147,12 +147,27 @@ Katalog `modeleBC/` zawiera dedykowane modele 3D postaci frakcyjnych oraz kluczo
 - `korona.glb` – Korona / Atrybut królewski (dolna obręcz wycentrowana na `(0, 0, 0)`)
 
 ### Dedykowane uzbrojenie i ekwipunek ról (Grip Origin w `0, 0, 0`):
-- `miecz_krola.glb` – Miecz królewski (chwyt rękojeści z jelcem w `Z = 0`)
-- `berlo.glb` – Berło królewskie (chwyt w `Z = 0`)
-- `sztylet_krolowa.glb` – Sztylet paradny Królowej (chwyt w `Z = 0`)
-- `kopia.glb` – Kopia kawaleryjska Skoczka (punkt chwytu za tarczką w `Z = 0`)
-- `puklerz.glb` – Mała tarcza / puklerz Skoczka (wewnętrzny uchwyt w `Y = 0`, centrowanie `X,Z = 0`)
-- `kostur_gonca.glb` – Pastorał / kostur Gońca (środek chwytu drzewca w `Z = 0`)
+- `miecz_krola.glb` – Miecz królewski (prawa dłoń Króla, chwyt rękojeści z jelcem w `Z = 0`)
+- `berlo.glb` – Berło królewskie (lewa dłoń Króla, chwyt w `Z = 0`)
+- `sztylet_krolowa.glb` – Sztylet paradny Królowej (lewa dłoń Królowej, chwyt w `Z = 0`)
+- `kopia.glb` – Kopia kawaleryjska Skoczka (prawa dłoń jeźdźca, punkt chwytu za tarczką w `Z = 0`)
+- `puklerz.glb` – Mała tarcza / puklerz Skoczka (lewa dłoń jeźdźca, wewnętrzny uchwyt w `Y = 0`, centrowanie `X,Z = 0`)
+- `kostur_gonca.glb` – Pastorał / kostur Gońca (prawa dłoń Gońca, środek chwytu drzewca w `Z = 0`)
+- `kielich_gonca.glb` – Złoty kielich rytualny Gońca (lewa dłoń `Socket_Hand_L`, punkt chwytu za nóżkę w `Z = 0`)
+- `mlot_wiezy.glb` – Ciężki młot oblężniczy Wieży (`rook_maul`, prawa dłoń `Socket_Hand_R`, chwyt rękojeści Grip w `Z = 0`)
+- `pawez_wiezy.glb` – Wielka pawęż piechoty z herbem dla Wieży (`rook_pavise_shield`, lewa dłoń `Socket_Hand_L`, uchwyt rzemieniowy w `0, 0, 0`)
+
+### Nakrycia głowy i atrybuty ról (`Socket_Crown` w `Z = 0`):
+- `korona.glb` – Korona królewska (dwukrotne użycie: duża dla Króla, mniejsza dla Hetmana)
+- `czepiec_wiezy.glb` – Stalowy hełm z ochraniaczami policzków dla Wieży (`bc_rook_turret`)
+- `czapka_gonca.glb` (alias: `goniec_czapka.glb`) – Trójrożna czapka błazeńska z dzwoneczkami dla Gońca
+- `kita_skoczka.glb` – Hełm rycerski z pióropuszem/kitą dla Skoczka (`bc_knight_crest_arch` + `plume`)
+
+### Cokoły pod figury:
+- `podstawka.glb` (alias: `cokol.glb`) – Rzeźbiony kamienny cokół bitewny z gruzem i pochyłą krawędzią (średnica `0.95 m` pod pole szachowe `1.15 m`, wysokość `0.135 m`, dno spoczywające dokładnie na `Z = 0`, waga zredukowana ze 124k do 4.3k ścianek — tylko 246 KB).
+
+### Efekty VFX i Mocy Specjalnej:
+- `specialpower.glb` – Animowany pionowy słup pulsujących pierścieni energii/aury podczas aktywacji mocy specjalnej (wysokość `2.10 m`, dno na poziomie ziemi `Z = 0`, 4 zintegrowane animacje Take 001). Tymczasowo wspólny dla wszystkich armii, docelowo zindywidualizowany per frakcja.
 
 ### Scenografia i Arena:
 - `plansza.glb` (alias: `luxury_onyx_and_marble_chess_board.glb`) – Luksusowy stół szachowy z polerowanego czarnego onyksu, białego marmuru i mosiężnego okuciu. Skalibrowany dokładnie pod silnik: 1 pole = `1.15 m` (szerokość 8x8 pól = `9.20 m`), wierzch kafelków dokładnie na `Y = 0`, z węzłami pomocniczymi `Board_Center`, `Tile_A1_Corner`, `Tile_H8_Corner`.

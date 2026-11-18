@@ -8,8 +8,10 @@ Dokument stanowi oficjalny rejestr techniczny i mapę drogową (Backlog Inżynie
 
 | Priorytet | Obszar Assetów | Plik w Kodzie Silnika | Uzasadnienie | Status |
 | :---: | :--- | :--- | :--- | :---: |
-| **P1** | **Zestaw Broni i Tarcz** | `pieceBuilder.ts` | Najbardziej rzuca się w oczy podczas zbliżeń kamery i animacji takedownów; obecne bryły kanciaste zaburzają immersję. | Role specjalne: WDROŻONE (`modeleBC/`)<br>Frakcyjne: W toku |
-| **P2** | **Cokoły (Podstawki) i Nakrycia Ról** | `pieceBuilder.ts` | Kluczowe dla natychmiastowej czytelności hierarchii szachowej (Król, Hetman, Goniec, Skoczek, Wieża). | Częściowo (`korona.glb`) |
+| **P1** | **Zestaw Broni i Tarcz Ról Specjalnych** | `pieceBuilder.ts` | Najbardziej rzuca się w oczy podczas zbliżeń kamery i animacji takedownów; obecne bryły kanciaste zaburzają immersję. | **KOMPLETNY (100% WDROŻONY)**<br>Król, Królowa, Skoczek, Goniec, Wieża |
+| **P1.5** | **Bronie Frakcyjne (Piony i Królowe)** | `pieceBuilder.ts` | Specyficzne oręże dla poszczególnych frakcji (topory, kosy, katany, broń palna). | Assety dostarczone (`bronie2`), przygotowane do kolejnej partii |
+| **P2** | **Cokoły (Podstawki) i Nakrycia Ról** | `pieceBuilder.ts` | Kluczowe dla natychmiastowej czytelności hierarchii szachowej (Król, Hetman, Goniec, Skoczek, Wieża). | **KOMPLETNY (100% WDROŻONY)**<br>`podstawka.glb`, `korona.glb`, `czepiec_wiezy.glb`, `czapka_gonca.glb`, `kita_skoczka.glb` |
+| **VFX** | **Efekty Mocy Specjalnej** | `pieceBuilder.ts` / Silnik | Wizualizacja ładowania i aktywacji unikalnych umiejętności figur. | **WDROŻONO** (`specialpower.glb` animowany słup energii) |
 | **P3** | **Rekwizyty Cutscenek Egzekucji** | `queenCutsceneDirector.ts` | Wyświetlane na pełnym ekranie w zbliżeniach makro podczas bicia Hetmana (wiadro, kwas, odcięta głowa). | Oczekuje na GLB |
 | **P4** | **Otoczenie Areny i Szachownica** | `ChessSceneManager.ts` | Tło sceny (koksowniki, kolumny cytadeli, rzeźbiona rama stołu szachowego). | Szachownica: WDROŻONO (`plansza.glb`)<br>Otoczenie: W toku |
 | **P5** | **Warianty Postaci Frakcji** | `modeleBC/` | Opcjonalne warianty siatki postaci dla poszczególnych ról (alternatywa dla dekorowania bazowego wojownika). | Baza frakcyjna gotowa |
@@ -33,40 +35,54 @@ Wszystkie obiekty trzymane w rękach figur na szachownicy składane są obecnie 
   - *Lewa dłoń:* Mała okrągła tarcza kawaleryjska / puklerz (`knight_buckler`). **Status:** WDROŻONO model `puklerz.glb` (uchwyt w `Y = 0`).
 - **Goniec (Bishop):**
   - *Prawa dłoń:* Długi kostur / pastorał zwieńczony klejnotem lub grotem (`bishop_staff`). **Status:** WDROŻONO model `kostur_gonca.glb` (środek chwytu w `Z = 0`).
-  - *Lewa dłoń:* Rytualna kadzielnica na łańcuchu lub święty kielich (`bishop_censer`).
+  - *Lewa dłoń:* Rytualna kadzielnica na łańcuchu lub święty kielich (`bishop_censer`). **Status:** WDROŻONO model `kielich_gonca.glb` (złoty kielich ze szmaragdami, chwyt za nóżkę w `Z = 0`).
 - **Wieża (Rook — Strażnik na baszcie `wieza.glb`):**
-  - *Prawa dłoń:* Ciężki dwuręczny młot oblężniczy (`rook_maul`).
-  - *Lewa dłoń:* Wielka prostokątna tarcza piechoty / pawęż (`rook_pavise_shield`).
+  - *Prawa dłoń:* Ciężki dwuręczny młot oblężniczy (`rook_maul`). **Status:** WDROŻONO model `mlot_wiezy.glb` (młot z runicznym obuszkiem, chwyt rękojeści Grip w `Z = 0`).
+  - *Lewa dłoń:* Wielka prostokątna tarcza piechoty / pawęż (`rook_pavise_shield`). **Status:** WDROŻONO model `pawez_wiezy.glb` (pawęż z herbem, uchwyt rzemieniowy w `0, 0, 0`).
 
 #### B. Bronie Frakcyjne (Piony i Królowe wg `weaponStyle`):
-- **Wikingowie / Rzeźnicy:** Topór bojowy jednoręczny/dwuręczny (`axe_shield`, `butcher_cleaver`) + tarcza wikingów.
+Modele wejściowe dostarczone w pakiecie `bronie2` (przygotowane do kalibracji w kolejnym etapie):
+- **Wikingowie / Rzeźnicy:** Topór bojowy jednoręczny/dwuręczny (`axe_shield`, `butcher_cleaver`) + tarcza wikingów. *Dostępny asset:* `set_of_five_viking_medieval_axes_blood_texture.glb` (zestaw 5 toporów z krwią) oraz `baseball_bat_covered_in_blood.glb`.
 - **Nieumarli (Horda):** Długa kosa ponurego żniwiarza (`scythe`).
 - **Ninja (Klan) / Piraci (Korsarze):** Zakrzywiona katana (`katana`) / piracka szabla/kordelas (`scimitar`) + sztylet tanto/sztylet ninja.
-- **Żołnierze / Kowboje / Mafia:** Karabin piechoty z bagnetem (`rifle_bayonet`), rewolwer kowbojski z lassem (`revolver_lasso`), pistolet maszynowy Tommy Gun z kastetem (`tommy_knuckles`).
+- **Żołnierze / Kowboje / Mafia:** 
+  - *Karabin piechoty:* Dostępny asset `low-poly_springfield_model_1873.glb`.
+  - *Rewolwer kowbojski:* Dostępny asset `default_gun__roblox_murder_mystery_2_aka_mm2.glb`.
+  - *Pistolet maszynowy Tommy Gun:* Dostępny asset `gangster_tommy_gun.glb`.
 - **Piony Tarczowe (Pozostałe armie):** Okrągła tarcza piechura z okuciem stalowym (`round_shield_pawn`).
 
 ---
 
-### 2.2. Podstawki pod Figury i Oznaczenia Rang (`pieceBuilder.ts`) — [PRIORYTET P2]
+### 2.2. Podstawki pod Figury i Oznaczenia Rang (`pieceBuilder.ts`) — [PRIORYTET P2 - WDROŻONY]
 
 Każda figura osadzona jest na cokole determinującym przynależność do drużyny i hierarchię.
 
 #### A. Podstawka Bitewna:
-- **Obecny stan:** Prosty walec z proceduralną teksturą kamienia (`plinth`) + świecący pierścień drużyny z `TorusGeometry` (biały / czerwony) oraz dodatkowe stopnie podwyższenia (`royal_step`, `bishop_step`).
-- **Rekomendowane rozwiązanie docelowe:** Jeden wspólny, rzeźbiony model cokołu figurkowego **`podstawka.glb`**, skalowany dynamicznie w kodzie:
-  - Skala bazowa (Pion, Skoczek, Wieża): `1.0x`
-  - Skala podwyższona (Goniec): `1.1x`
-  - Skala majestatyczna (Hetman, Król): `1.2x`
-  - Slot na materiał emissive (kolor armii).
+- **Status:** **WDROŻONO** model **`podstawka.glb`** (alias: `cokol.glb`).
+  - Rzeźbiony kamienny cokół bitewny z detalami gruzu i pochyłą krawędzią.
+  - Średnica bazowa: `0.95 m` (dokładnie dopasowana do pola `1.15 m`).
+  - Wysokość: `0.135 m`.
+  - Dno spoczywa idealnie na `Z = 0` (Three.js `Y = 0`), a wierzch tworzy platformę na stopy figurki.
+  - Zoptymalizowana siatka (Decimate): waga zmniejszona z 5.1 MB do zaledwie **246 KB** (4 361 ścianek).
 
 #### B. Szaty i Zbroja Rang:
 - Peleryny rangowe (`rank_cape`) – obecnie płaskie płaszczyzny geometryczne dla Króla, Królowej i Gońca.
 - Naramienniki z kolcami (`rank_pauldron`), kołnierze królewskie (`royal_collar_*`), haftowane stuły Gońca (`bishop_stole_trim`).
 
-#### C. Nakrycia Głowy Ról (poza zintegrowaną już `korona.glb`):
-- **Wieża:** Minisylwetka baszty / czepiec z blankami (`bc_rook_turret` + `merlon`) na głowie strzelca.
-- **Goniec:** Stożkowa mitra biskupia (`bc_bishop_mitre`) oraz aureola z torusa (`halo`) za głową.
-- **Skoczek:** Grzebień hełmowy i powiewająca kita końska (`bc_knight_crest_arch` + `plume`) na głowie jeźdźca.
+#### C. Nakrycia Głowy Ról (WDROŻONE W CAŁOŚCI):
+- **Król i Hetman:** Model `korona.glb` (duża dla Króla, mniejsza dla Hetmana).
+- **Wieża:** Model `czepiec_wiezy.glb` (stalowy hełm z ochraniaczami policzków i grzebieniem, podstawa w `Z = 0`).
+- **Goniec:** Model `czapka_gonca.glb` (trójrożna czapka błazeńska z dzwoneczkami, podstawa w `Z = 0`).
+- **Skoczek:** Model `kita_skoczka.glb` (pełny hełm rycerski z kitą/pióropuszem na szczycie, podstawa w `Z = 0`).
+
+---
+
+### 2.2.1. Efekty Mocy Specjalnej (VFX) — [NOWOŚĆ - WDROŻONY]
+- **Status:** **WDROŻONO** model **`specialpower.glb`**.
+  - Animowany, wielowarstwowy słup pulsujących pierścieni energii / aury.
+  - Wysokość: `2.10 m` (obejmuje sylwetkę wojownika o wzroście 1.8 m), podstawa na `Z = 0`.
+  - Zawiera 4 niezależne ścieżki animacji glTF (`Take 001_Plane001_4` do `Plane004_3`).
+  - W obecnym etapie pełni rolę efektu uniwersalnego dla wszystkich armii (w kolejnych etapach każda armia otrzyma unikalną odmianę kolorystyczną lub geometryczną).
 
 ---
 
