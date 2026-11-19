@@ -23,6 +23,45 @@ Podczas rozgrywki na telefonie dotknięcie ekranu nie może obracać ani przesuw
 
 ---
 
+### 1.3. Ograniczenie Ruchu Kamery Swobodnej / Kolizja ze Ścianami („Kamerzysta plecami do ściany”)
+
+Gdy gracz przełącza się na kamerę swobodną lub korzysta z obrotu (`OrbitControls`), kamera **NIGDY nie może przebić ścian lochu ani uciec w zewnętrzną pustkę** (żeby gracz nie patrzył na ścianę od zewnętrznej strony po gwałtownym geście).
+
+#### A. Wbudowane limity OrbitControls (Kąty i zasięg w metrach):
+```typescript
+// 1. Ograniczenie zoomu / odległości od środka planszy (0,0,0)
+controls.minDistance = 3.2;   // Gracz nie wjedzie kamerą wewnątrz figur ani pod stół
+controls.maxDistance = 11.0;  // Ściany boczne są na 9.73m, a narożniki na ~12m - limit 11.0m trzyma kamerzystę wewnątrz sali
+
+// 2. Ograniczenie kąta pionowego (polar angle)
+controls.minPolarAngle = 0.15;                 // Blokada przed przewrotem kamery do góry nogami (~8.5°)
+controls.maxPolarAngle = Math.PI / 2 - 0.08;   // Kamerzysta nie kuca w posadzce ani nie patrzy spod podłogi (~85°)
+```
+
+#### B. Wirtualny Bounding Box lochu (Twarde zatrzymanie „plecami o mur”):
+W pętli animacji (`requestAnimationFrame` lub `controls.addEventListener('change')`) dodaj prosty clamp współrzędnych kamery:
+
+```typescript
+/**
+ * Ogranicza pozycję kamery do wnętrza lochu.
+ * Wymiary uwzględniają bufor 0.8m na ciało kamerzysty przed licem murów:
+ * - Ściany boczne (X): lico na ±9.73m  -> granica X: [-8.9m, +8.9m]
+ * - Portale bram (Z):  lico na ±13.50m -> granica Z: [-12.2m, +12.2m]
+ * - Posadzka i strop:  posadzka 0.0m   -> granica Y: [0.8m, 7.5m]
+ */
+export function clampCameraToDungeon(camera: THREE.Camera) {
+  // Dla standardowego układu współrzędnych Three.js (Y w górę):
+  camera.position.x = THREE.MathUtils.clamp(camera.position.x, -8.9, 8.9);
+  camera.position.z = THREE.MathUtils.clamp(camera.position.z, -12.2, 12.2);
+  camera.position.y = THREE.MathUtils.clamp(camera.position.y, 0.8, 7.5);
+
+  // (Uwaga: Jeśli w Twojej scenie Three.js pionem jest oś Z, a przodem Y,
+  // zamień miejscami clampy Y i Z: Y w [-12.2, 12.2], a Z w [0.8, 7.5])
+}
+```
+
+---
+
 ## 2. Mechanika Interakcji: System Double-Tap / Two-Step (PC + Mobile)
 
 To samo, intuicyjne i bezpieczne zachowanie na myszce i ekranie dotykowym:
