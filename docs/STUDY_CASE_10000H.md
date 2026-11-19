@@ -26,7 +26,7 @@
 - **Wpis 9:** Pierwsza filmowa egzekucja Hetmana — choreografia takedownu Horda vs Syndykat (reżyseria kamer i animacji NLA).
 - **Wpis 10:** Anatomiczna kalibracja skal bierek w silniku — proporcje od Sabatu Goblinów ($70\text{ cm}$) po Wikingów ($215\text{ cm}$) oraz rozwiązanie zagadki przysiadu Ninja.
 
-### [Tom 3: Symbole Szachowe 3D, Standard Interakcji i Arena Lochów (Wpisy 11–18)](study_case/tom_3_symbole_interakcja_i_sceneria.md)
+### [Tom 3: Symbole Szachowe 3D, Standard Interakcji i Arena Lochów (Wpisy 11–19)](study_case/tom_3_symbole_interakcja_i_sceneria.md)
 *Identyfikacja bierek w 3D, ergonomia Double-Tap na telefonach oraz budowa monumentalnej scenerii lochów.*
 - **Wpis 11:** Trójwymiarowe runy rangowe bierek — generowanie lewitujących symboli Unicode (glTF PBR) z dynamicznym barwieniem 10 frakcji.
 - **Wpis 12:** Standard interakcji Double-Tap (PC & Mobile), rygor zablokowanej kamery meczowej i warunkowa asysta trudności (Easy).
@@ -36,6 +36,7 @@
 - **Wpis 16:** Zabudowa podmurówki szachownicy, pionowanie wielkich sztandarów heraldycznych oraz czarny rant PBR symboli 3D.
 - **Wpis 17:** Architektura Dwóch Okien – Zapis dialogu Twórca ↔ Architekt, anatomia procesu i dlaczego nie naprawia się assetów 3D w kodzie Studia (Źródło vs Proteza w Three.js).
 - **Wpis 18:** Mit „Wspólnego Mózgu” AI – Dlaczego okna na tym samym koncie ze sobą nie rozmawiają i jak w inżynierii „otwiera się drzwi” (Blackboard, MCP, A2A).
+- **Wpis 19:** Psychologia i Matematyka Relacji Człowiek–AI – Dlaczego intencja (Backstory) i kultura traktowania modelu determinują jakość kodu i assetów.
 
 ---
 
