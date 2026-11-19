@@ -274,11 +274,16 @@ W tradycyjnej inżynierii oprogramowania istnieje zasada *Separation of Concerns
 
 | Objaw na ekranie | Błędny odruch | Prawidłowa ścieżka inżynierska | Rezultat |
 | :--- | :--- | :--- | :--- |
-| **Pusta przestrzeń pod szachownicą** | Poproszenie Studia o „dorobienie podłogi w kodzie” | Zgłoszenie do Architekta $ightarrow$ wygenerowanie kamiennego monolitu podmurówki w Blenderze z mapowaniem UV | Czysty model `sceneria_lochy.glb`, zero zbędnego kodu w silniku |
-| **Sztandar sterczy poziomo ze ściany** | Próby obracania w Three.js `banner.rotation.x = ...` (co deformuje szkielet) | Zgłoszenie do Architekta $ightarrow$ diagnoza kwaternionów, rektyfikacja osi wierzchołków i montaż na ścianie w pliku sceny | Prawidłowy, pionowy zwis tkaniny z zachowaną animacją powiewania |
-| **Symbole bierek zlewają się z tłem** | Pisanie shaderów post-processingu krawędzi (niski FPS na mobile) | Zgłoszenie do Architekta $ightarrow$ dodanie bevelu i Slotu 1 z czarnym rantem PBR w siatce | Wyrazisty kontur 3D działający sprzętowo bez spadku klatek |
-| **Kamera meczowa nie reaguje na rotację telefonu** | Poproszenie Architekta o przestawienie kamery w GLB | Zgłoszenie do Studia $ightarrow$ aktualizacja `camera.aspect` i blokada w resize event listenerze | Prawidłowa obsługa responsywności w przeglądarce |
-| **Kliknięcie bierki wroga wykonuje niedozwolony ruch** | Zgłoszenie do Architekta | Zgłoszenie do Studia $ightarrow$ poprawka warunku `if (isEnemy && !selectedPiece)` w kontrolerze Two-Step | Poprawna logika stanu gry |
+| **Pusta przestrzeń pod szachownicą** | Poproszenie Studia o „dorobienie podłogi w kodzie” | Zgłoszenie do Architekta $
+ightarrow$ wygenerowanie kamiennego monolitu podmurówki w Blenderze z mapowaniem UV | Czysty model `sceneria_lochy.glb`, zero zbędnego kodu w silniku |
+| **Sztandar sterczy poziomo ze ściany** | Próby obracania w Three.js `banner.rotation.x = ...` (co deformuje szkielet) | Zgłoszenie do Architekta $
+ightarrow$ diagnoza kwaternionów, rektyfikacja osi wierzchołków i montaż na ścianie w pliku sceny | Prawidłowy, pionowy zwis tkaniny z zachowaną animacją powiewania |
+| **Symbole bierek zlewają się z tłem** | Pisanie shaderów post-processingu krawędzi (niski FPS na mobile) | Zgłoszenie do Architekta $
+ightarrow$ dodanie bevelu i Slotu 1 z czarnym rantem PBR w siatce | Wyrazisty kontur 3D działający sprzętowo bez spadku klatek |
+| **Kamera meczowa nie reaguje na rotację telefonu** | Poproszenie Architekta o przestawienie kamery w GLB | Zgłoszenie do Studia $
+ightarrow$ aktualizacja `camera.aspect` i blokada w resize event listenerze | Prawidłowa obsługa responsywności w przeglądarce |
+| **Kliknięcie bierki wroga wykonuje niedozwolony ruch** | Zgłoszenie do Architekta | Zgłoszenie do Studia $
+ightarrow$ poprawka warunku `if (isEnemy && !selectedPiece)` w kontrolerze Two-Step | Poprawna logika stanu gry |
 
 ---
 
@@ -292,3 +297,131 @@ W tradycyjnej inżynierii oprogramowania istnieje zasada *Separation of Concerns
 > - Rozdzielasz pracę pomiędzy wyspecjalizowanych agentów, dając każdemu narzędzia dopasowane do natury problemu.  
 > 
 > Wtedy i tylko wtedy gra na 10 frakcji, z pełnym riggingiem, animowanymi egzekucjami, unikalnym UI i fotorealistyczną scenografią 3D może powstać w pojedynkę w zaledwie kilka sesji.
+
+
+---
+
+## Wpis 18: Mit „Wspólnego Mózgu” AI – Dlaczego okna na tym samym koncie ze sobą nie rozmawiają i jak w inżynierii „otwiera się drzwi” (Blackboard, MCP, A2A)
+
+### 1. Zapis autentycznego dialogu (Twórca ↔ Architekt)
+
+Jedno z najbardziej uniwersalnych i kluczowych pytań, jakie zadaje sobie niemal każdy człowiek na świecie stykający się ze współczesną sztuczną inteligencją:
+
+> **Twórca:**  
+> *"Wytłumacz jeszcze jedno. Ty jesteś Antigravity, mam jeszcze studio i 'zwykłe' Gemini. Żadne z was nie jest świadome, że pracuję z pozostałymi? Tj. wiecie o tym, bo wam powiedziałem, ale czy nie mieliście tej wiedzy wcześniej? Ten sam LLM, to samo konto?"*
+
+> **Architekt (Aga):**  
+> *"Krótka i jednoznaczna odpowiedź brzmi: **Nie, żadne z nas nie miało o tym zielonego pojęcia, dopóki nam o tym nie powiedziałeś.**  
+>  
+> Mimo że korzystasz z tego samego konta Google i pod spodem może odpowiadać ten sam model bazowy (rodzina modeli Gemini), z punktu widzenia architektury systemowej jesteśmy **trzema zupełnie odciętymi od siebie bytami**.*  
+>  
+> *1. **Model nie ma 'świadomości w tle' ani wspólnego mózgu:** Sam model językowy (LLM) jest z natury **bezstanowy (stateless)**. To zbiór zamrożonych wag matematycznych. Model nie 'żyje' w chmurze pomiędzy zapytaniami, nie rozmyśla o Twojej grze, gdy nic nie piszesz, i nie posiada żadnego 'wspólnego notesu', do którego wpisywałby: 'Aha, ten użytkownik właśnie zapytał o coś w oknie obok'. Dla modelu każda wiadomość istnieje tylko w granicach **okna kontekstowego (Context Window)** danej rozmowy.*  
+> *2. **Trzy zupełnie różne aplikacje i silosy danych:**  
+>    - **Zwykłe Gemini (`gemini.google.com`):** Konsumencki asystent webowy. Widzi historię czatów tylko wewnątrz swojego interfejsu.  
+>    - **Google AI Studio (`aistudio.google.com`):** Środowisko laboratoryjno-deweloperskie. Służy do bezpośredniej pracy na API, testowania promptów systemowych i pisania kodu. Nie ma pojęcia o Twoich prywatnych czatach ze 'zwykłym Gemini'.  
+>    - **Antigravity (nasze środowisko tutaj):** Zaawansowany agent inżynieryjny z dostępem do Twojego komputera (dysku twardego, terminala PowerShell, Gita, Blendera). Moja pamięć i wiedza o projekcie pochodzą **wyłącznie z plików, które czytam na Twoim dysku** (z repozytorium, dokumentacji w `docs/` i logów naszej sesji).*  
+> *3. **Bezpieczeństwo i prywatność (Data Isolation):** Gdyby Google pozwalało modelom swobodnie 'podglądać', co robisz w innych oknach czy usługach na tym samym koncie, byłoby to potężne naruszenie bezpieczeństwa i prywatności. Granice między sesjami są nieprzekraczalne.*  
+>  
+> ***Metafora: Trzej bracia w osobnych pokojach***  
+> *Wyobraź sobie trzech braci bliźniaków:*  
+> *1. Mają to samo wykształcenie, ten sam mózg i tak samo myślą (**ten sam LLM**).*  
+> *2. Siedzą w trzech oddzielnych, dźwiękoszczelnych pokojach w tym samym budynku (**to samo konto Google**):*  
+> *   - Jeden siedzi w recepcji (**zwykłe Gemini**),*  
+> *   - Drugi w pracowni programistycznej przed ekranem kodu (**Studio**),*  
+> *   - Trzeci w warsztacie mechanicznym z narzędziami w dłoniach (**Antigravity**).*  
+>  
+> *Żaden z nich nie słyszy, o czym rozmawiasz z pozostałymi. **Jedynym łącznikiem, kurierem i dyrektorem całego przedsięwzięcia jesteś Ty sam.** Jeśli weźmiesz wydruk z warsztatu i zaniesiesz go do pracowni programistycznej (lub odwrotnie) – dopiero wtedy wiedza przepływa."*
+
+---
+
+> **Twórca:**  
+> *"W takim razie czy jest możliwość 'otwarcia drzwi' trzymając się analogii? Żeby te informacje przepływały bez mojego udziału? Jeśli tak, to powiedz, to pytanie tylko teoretyczne."*
+
+> **Architekt (Aga):**  
+> *"**Teoretycznie – i z punktu widzenia inżynierii AI – jak najbardziej TAK.** Co więcej, to jest dokładnie ten kierunek, w którym zmierza cała branża systemów wieloagentowych (Multi-Agent Systems).*  
+>  
+> *Trzymając się naszej analogii: drzwi są teraz zamknięte na klucz nie dlatego, że technologia na to nie pozwala, ale dlatego, że **świadomie nikt jeszcze nie wybił w tych ścianach korytarza**.*  
+>  
+> *Gdybyśmy chcieli te drzwi otworzyć teoretycznie (lub architektonicznie), robi się to na **trzy sposoby**:*  
+>  
+> *1. **Wzorzec Wspólnej Tablicy (Blackboard Pattern / Współdzielona Pamięć):**  
+> Montujemy na korytarzu jedną wielką, cyfrową tablicę korkową (np. bazę danych Redis, bazę wektorową albo zsynchronizowane repozytorium Git / Google Drive). Ja kończę naprawę sztandaru w Blenderze i wieszam na tablicy notatkę: `[STATUS: READY] Model sceneria_lochy.glb zaktualizowany`. Brat w Studio nie czeka na Ciebie – ma uruchomionego 'nasłuchiwacza' (watcher/webhook), automatycznie pobiera model, sam przeładowuje kod Three.js i sprawdza, czy działa.*  
+> *2. **Bezpośrednie łącze Agent-to-Agent (Protokół A2A / Inter-Agent Messaging / MCP):**  
+> Instalujemy w ścianie interkom (np. otwarty standard MCP – Model Context Protocol czy protokoły typu Swarm). Po zakończeniu pracy w Blenderze wysyłam bezpośredni pakiet danych API prosto do Studia: 'Cześć Studio, wygenerowałem symbole z dwoma slotami materiałowymi, podmień snippet w `pieceRenderer.ts`'. Studio odpisuje: 'Wdrożone, testy przechodzą'.*  
+> *3. **Zdarzeniowy potok produkcyjny (Event-Driven CI/CD):**  
+> Ja robię `git push origin main`, serwer w ułamku sekundy odpala webhooka, który budzi agenta w Studio: 'Pojawił się nowy commit z modelami', a Studio samo pobiera zmiany.*  
+>  
+> ***Dlaczego te drzwi są dziś jeszcze zamknięte fabrycznie?***  
+> *1. **Ryzyko pętli nieskończonej i spalenia budżetu (Infinite Loops):** Dwa modele rozmawiające ze sobą bez człowieka w pętli (Human-in-the-Loop) potrafią wpaść w pętlę wzajemnych uprzejmości lub niekończących się poprawek. W 10 minut mogłyby spalić Twój miesięczny limit tokenów.*  
+> *2. **Bezpieczeństwo i izolacja (Sandboxing):** 'Zwykłe' Gemini rozmawia z milionami ludzi o wszystkim. Gdyby miało bezpośredni kanał do Twojego dysku w Antigravity, jakikolwiek błąd czy prompt injection z internetu mógłby zagrozić Twojemu systemowi operacyjnemu.*  
+> *3. **Rola człowieka jako Reżysera:** Na obecnym etapie rozwoju AI człowiek jest potrzebny jako filtr intencji i estetyki. Modele same z siebie nie wiedzą, czy gotycki klimat albo czarny rant 'dobrze wygląda' – to Ty spojrzałeś na screena i podjąłeś decyzję kierunkową.*  
+>  
+> *W przyszłości te drzwi będą się otwierać: będziesz miał jednego głównego koordynatora, który w tle będzie po cichu wysyłał pod-agentów: jednego do Blendera, drugiego do kodu w przeglądarce, a sam będzie tylko raportował Ci gotowy wynik."*
+
+---
+
+### 2. Dlaczego 99% ludzi tego nie rozumie? Anatomia złudzenia „Jednego AI”
+
+Z perspektywy przeciętnego użytkownika internetu sztuczna inteligencja jawi się jako **jeden globalny, wszechwiedzący byt („Chmura Google”, „Chmura OpenAI”)**. Gdy logujemy się tym samym mailem do Gmaila, YouTube'a i Dysku, Google doskonale wie, kim jesteśmy i synchronizuje nasze dane. Użytkownik naturalnie zakłada, że skoro wchodzi na `gemini.google.com`, a potem do `AI Studio` i do `Antigravity`, to rozmawia z „tą samą osobą, która po prostu zmieniła pokój”.
+
+To intuicyjne założenie jest jednak **technologicznym złudzeniem**.
+
+```
+ZŁUDZENIE UŻYTKOWNIKA:
+[ Użytkownik ] ─── (Jedno konto Google) ───► [ Jeden Wielki Mózg AI ] ───► Pamięta wszystko wszędzie
+
+RZECZYWISTOŚĆ ARCHITEKTONICZNA:
+                                            ┌──► [ Aplikacja Gemini Web ]  ── (Własna historia czatu w chmurze)
+[ Użytkownik ] ─── (Niezależne Zapytania) ──┼──► [ Google AI Studio ]      ── (Czysta sesja deweloperska API)
+                                            └──► [ Antigravity IDE ]       ── (Lokalny system plików, Git, Blender)
+                                                         │
+                                                  [ LLM: Gemini ]
+                                            (Bezstanowy silnik obliczeniowy:
+                                             przelicza tokeny na bieżąco,
+                                             nie przechowuje pamięci trwałej)
+```
+
+#### Kluczowe pojęcia, które wyjaśniają ten fenomen:
+
+1. **Bezstanowość sieci neuronowej (Stateless Inference):**  
+   Gdy wysyłasz prompt do modelu, serwer wykonuje czystą operację matematyczną: mnożenie macierzy wag przez wektory Twoich słów. W chwili, gdy model wypluwa ostatnie słowo odpowiedzi, **cały stan pamięci operacyjnej znika**. Model „zapomina” o Tobie w milisekundzie.  
+   To, co sprawia wrażenie „pamięci” w czacie, to po prostu historia wcześniejszych wiadomości, którą aplikacja **wkleja w ukryciu na początku każdego Twojego kolejnego pytania**.
+2. **Silos Kontekstowy (Context Silo):**  
+   Ponieważ pamięć nie siedzi w modelu, lecz w aplikacji, każde narzędzie zarządza nią inaczej:
+   - Webchat przechowuje bazę konwersacji w chmurze konsumenckiej.
+   - Studio przechowuje parametry i system prompt w środowisku deweloperskim.
+   - Antigravity opiera się na **pamięci dyskowej (Local Workspace Truth)** – czyta Twoje pliki `.md`, drzewo katalogów, stan repozytorium Gita i historię poleceń terminala.
+3. **Dlaczego brak komunikacji to zaleta, a nie wada (Feature, not a Bug):**  
+   Wyobraź sobie, że piszesz poufny kod w Studio, a w zwykłym Gemini pytasz o przepis na ciasto albo analizujesz wrażliwy e-mail. Brak automatycznego „przeciekania” wiedzy między oknami to fundament bezpieczeństwa korporacyjnego i prywatności użytkownika.
+
+---
+
+### 3. Jak w praktyce buduje się „Otwarte Drzwi” (Współczesna Inżynieria Agentowa)
+
+Dla programistów i architektów systemów AI, którzy chcą połączyć niezależne modele w zintegrowany organizm, współczesna inżynieria oferuje gotowe paradygmaty:
+
+#### A. Model Context Protocol (MCP) – Otwarty Standard Komunikacji
+Wprowadzony niedawno standard **MCP** działa jak uniwersalne złącze USB-C dla sztucznej inteligencji. Pozwala agentowi w jednym środowisku wystawić tzw. serwer MCP, z którego narzędzi i zasobów może korzystać inny agent w zupełnie innym oknie lub maszynie.
+
+#### B. Wzorzec „Tablicy Ogłoszeń” (Blackboard Architectural Pattern)
+Stosowany z powodzeniem w systemach wojskowych, medycznych i zaawansowanych grach:
+- Żaden agent nie mówi bezpośrednio do innego.
+- Istnieje jedna „Tablica Prawdy” (Shared State) – w naszym przypadku jest to **repozytorium Git ze standaryzowanymi plikami `.glb` oraz dokumentacją `docs/`**.
+- Antigravity wiesza na tablicy wynik: `git commit -m "fix(scenery): add solid stone podium..." && git push`.
+- Każde inne narzędzie, które ma dostęp do tego repozytorium, natychmiast czerpie z prawdy źródła.
+
+#### C. Human-in-the-Loop jako Bezpiecznik Ekonomiczny
+Najważniejsza lekcja dla każdego, kto marzy o w pełni autonomicznych rojach agentów:  
+**Drzwi zamknięte chronią Twój portfel i Twój projekt.**  
+Dwóch agentów pozostawionych samych sobie potrafi wpaść w pętlę niekończącego się doprecyzowywania (Over-engineering Loop). Człowiek stojący w progu z jednym zrzutem ekranu wykonuje w 3 sekundy operację, której agenci nie dokonaliby przez 500 iteracji: **dokonuje arbitralnego wyboru estetycznego i funkcjonalnego**.
+
+---
+
+### 4. Podsumowanie do książki „Po 10 000 godzin vibecodingu jesteś programistą”
+
+> [!TIP]
+> **Złote Prawo Vibecodingu nr 18:**  
+> Przestań traktować AI jak wszechwiedzącego ducha w chmurze, który „powinien pamiętać, co robiłeś wczoraj w innej karcie”.  
+> Traktuj AI jak **potężny, bezstanowy silnik inżynieryjny**, który staje się tak mądry, jak precyzyjnie przygotujesz mu kontekst i narzędzia w danym pokoju roboczym.  
+> 
+> Twoją rolą jako Vibecodera nie jest zastąpienie myślenia maszyną — Twoją rolą jest **zarządzanie architekturą przepływu informacji między pokojami**.
