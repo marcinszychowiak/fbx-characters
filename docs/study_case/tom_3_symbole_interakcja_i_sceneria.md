@@ -196,3 +196,99 @@ Po zintegrowaniu wyeksportowanych assetów w silniku gry Twórca przekazał kluc
 - `modeleBC/preview_arena_lochy_detal.png` – Cinematic zbliżenie na narożny bastion z płonącym koksownikiem i płytę szachownicy.
 - `modeleBC/showcase_symbole_szachowe_3d.png` – Prezentacja 6 symboli z czarnym rantem.
 - `modeleBC/showcase_10_frakcji_kolory.png` – Podgląd 10 barw frakcyjnych w zestawieniu z czarnym obrysem.
+
+
+---
+
+## Wpis 17: Architektura Dwóch Okien – Zapis dialogu, anatomia procesu i dlaczego nie naprawia się assetów 3D w kodzie Studia
+
+### 1. Zapis autentycznego dialogu (Twórca ↔ Architekt)
+
+Poniższy dialog stanowi jeden z najważniejszych momentów refleksji metodologicznej w całym procesie powstawania gry *BloodChess*. Obnaża on fundamentalną różnicę między teoretycznym pisaniem kodu przez AI a praktyczną inżynierią binarno-przestrzenną.
+
+> **Twórca:**  
+> *"Z punktu widzenia logiki nie ma różnicy między budową w studio, a budową tego typu gry z tobą, czy jest?"*
+
+> **Architekt (Aga):**  
+> *"Z punktu widzenia samej abstrakcyjnej logiki gry (reguły szachowe, ruchy bierek, sprawdzanie szacha, stan FEN czy warunki zwycięstwa) różnicy nie ma – kod logiczny, algorytmy i matematyka w TypeScript czy JavaScript są identyczne bez względu na to, które okno je generuje.*  
+>  
+> *Jednak z punktu widzenia procesu budowy tego typu gry, różnica jest diametralna:*  
+> *1. **'Pisanie w próżni' vs 'Inżynieria z pętlą zwrotną':** W Studio model widzi tylko tekst w oknie przeglądarki. Może napisać kod Three.js, ale nie ma rąk ani oczu w Twoim systemie operacyjnym. Nie może otworzyć pliku .glb, nie wie, że wierzchołki sztandaru biegną po osi Y zamiast Z, ani że model ma zagnieżdżony kwaternion. Tutaj (Architekt / Antigravity) mam bezpośredni dostęp do środowiska: terminala, systemu plików, Gita i headless Blendera. Mogę zmierzyć współrzędne wierzchołków, wyrenderować ujęcie testowe i zobaczyć własnymi oczami, czy scena wygląda poprawnie przed oddaniem jej Tobie.*  
+> *2. **Czarne skrzynki binarne vs prefabrykaty:** Studio zakłada, że assety 3D są idealne. W grach 3D tak prawie nigdy nie jest – surowe modele to chaos. Ja zamieniam ten chaos w skalibrowane 'prefabrykaty' (dokładna wysokość, pivot w zerze, sloty materiałowe).*  
+> *3. **Pamięć i stabilność:** Studio zatyka się przy długich sesjach i obszernych plikach. Tutaj utrzymujemy długoterminową architekturę całego projektu – wersjonowanie Git, podział na tomy dokumentacji i logi decyzyjne.*  
+>  
+> *Studio to plac budowy na ekranie (składanie klocków w przeglądarce), a nasze środowisko tutaj to fabryka tych klocków i biuro konstrukcyjne."*
+
+---
+
+> **Twórca:**  
+> *"Czekaj, czekaj. Odniosę się do kwestii którą poruszyłeś w 3.2. Czyli nie ma sensu zwracać uwagi modelowi w studiu, że coś jest krzywo, bo i tak nie może tego zobaczyć? Tak jak wysłałem ci screena, myślałem, czy nie wysłać go jemu...."*
+
+> **Architekt (Aga):**  
+> *"Wysłać screena do Studia jak najbardziej możesz (współczesne modele w Studio też mają 'wzrok' i przeanalizują obrazek). Pytanie brzmi: **co Studio jest w stanie z tą wiedzą zrobić?***  
+>  
+> *I tu dochodzimy do sedna sprawy, czyli różnicy między **naprawą źródła (w pliku 3D)** a **lepieniem protez w kodzie**:*  
+>  
+> *Co by się stało, gdybyś wysłał ten screen do Studia? Studio zobaczyłoby lewitującą szachownicę, poziomy sztandar i blade symbole. Ale ponieważ nie ma dostępu do Blendera ani plików binarnych .glb, spróbowałoby naprawić to wyłącznie przez kod TypeScript/Three.js:*  
+> *1. **Na lewitującą szachownicę:** Studio nie może dorobić kamiennej gotyckiej podmurówki w modelu. Zamiast tego dopisałoby do kodu linijki w stylu: `const fakePodium = new THREE.Mesh(new THREE.BoxGeometry(...))`. Dostałbyś gładki, szary, proceduralny klocek pod planszą, który wyglądałby jak plastik i gryzł się z gotycką scenerią.*  
+> *2. **Na poziomy sztandar:** Studio zaczęłoby w kodzie zgadywać obroty: `banner.rotation.x = Math.PI / 2`. Ponieważ jednak sztandar miał zagnieżdżone kwaterniony i szkielet animacji wiatru, obrót w Three.js często deformuje animację powiewania albo obraca sztandar nie w tę stronę, co trzeba.*  
+> *3. **Na brak rantu symboli:** Studio musiałoby pisać skomplikowane shadery krawędziowe (Edge Detection / Post-processing Outline), które na telefonach natychmiast zabiłyby płynność (spadek FPS).*  
+>  
+> *Efekt? Kod w Studio po 3 takich próbach stałby się monstrualny, zaśmiecony setkami linijek 'korekt i protez' dla niedoskonałych modeli, a sam model w Studio zacząłby się gubić.*  
+>  
+> *Wysyłanie screenów z błędami geometrii, brakiem ścian czy wadami modeli do Studia kończy się pisaniem kodu, który próbuje 'zamaskować' błąd w pliku 3D. Tutaj naprawiamy sam plik 3D, dzięki czemu Studio dostaje idealny asset i jego kod pozostaje czysty, szybki i stabilny."*
+
+---
+
+### 2. Wyjaśnienie metodologiczne: Zasada Prawdy Źródła (Source of Truth)
+
+W tradycyjnej inżynierii oprogramowania istnieje zasada *Separation of Concerns* (Rozdział Odpowiedzialności). W metodyce **Vibecodingu** (gdzie człowiek steruje intencją, a agenci AI realizują poszczególne domeny) zasada ta przybiera formę **Architektury Dwóch Okien**:
+
+```
+[ TWÓRCA / REŻYSER ]
+      │
+      ├────────────────────────────────────────┐
+      ▼                                        ▼
+[ OKNO 1: ARCHITEKT (Antigravity) ]   [ OKNO 2: STUDIO KODOWANIA ]
+• Fabryka Assetów i Rzeczywistość 3D   • Plac Budowy i Runtime
+• Dostęp do Blendera, CLI, Gita       • Kod TypeScript, Three.js, React
+• Weryfikacja wizualna renderów EEVEE • Hot Module Replacement (HMR) w przeglądarce
+• Naprawa wierzchołków i UV w .GLB    • Logika zdarzeń UI, audio, stan partii
+      │                                        ▲
+      └──────── Czyste Prefabrykaty ───────────┘
+```
+
+#### Dlaczego próba zrobienia wszystkiego w jednym oknie prowadzi do katastrofy?
+1. **Dług technologiczny „kodu protezowego” (Band-aid code):**  
+   Gdy programista (lub agent LLM w Studio) próbuje maskować wady plików 3D za pomocą kodu (`mesh.position.y += 0.28`, `mesh.scale.set(0.006, 0.006, 0.006)`, `mesh.rotation.x = -1.5707`), silnik gry marnuje cykle CPU/GPU na transformacje, a kod staje się nieczytelny.
+2. **Kolejne halucynacje z przeciążenia kontekstu:**  
+   Gdy Studio próbuje jednocześnie pamiętać zasady szachowe, logikę animacji, obsługę touch/mobile ORAZ dziesiątki poprawek pozycjonowania dla każdego źle wyeksportowanego modelu, przekracza limit roboczy uwagi (attention span). Rezultatem są regresje – naprawiając obrót sztandaru, Studio psuje logikę kliknięcia piona.
+3. **Czystość prefabrykatu:**  
+   Gdy model trafia do repozytorium z poprawnym pivotem w `(0,0,0)`, poprawną skalą w metrach i właściwymi slotami materiałowymi, kod w Studio sprowadza się do elementarnego:  
+   `scene.add(loadedModel)`.  
+   Żadnych hacków, żadnych poprawek w locie.
+
+---
+
+### 3. Matryca Decyzyjna: Gdzie kierować zgłoszenie?
+
+| Objaw na ekranie | Błędny odruch | Prawidłowa ścieżka inżynierska | Rezultat |
+| :--- | :--- | :--- | :--- |
+| **Pusta przestrzeń pod szachownicą** | Poproszenie Studia o „dorobienie podłogi w kodzie” | Zgłoszenie do Architekta $ightarrow$ wygenerowanie kamiennego monolitu podmurówki w Blenderze z mapowaniem UV | Czysty model `sceneria_lochy.glb`, zero zbędnego kodu w silniku |
+| **Sztandar sterczy poziomo ze ściany** | Próby obracania w Three.js `banner.rotation.x = ...` (co deformuje szkielet) | Zgłoszenie do Architekta $ightarrow$ diagnoza kwaternionów, rektyfikacja osi wierzchołków i montaż na ścianie w pliku sceny | Prawidłowy, pionowy zwis tkaniny z zachowaną animacją powiewania |
+| **Symbole bierek zlewają się z tłem** | Pisanie shaderów post-processingu krawędzi (niski FPS na mobile) | Zgłoszenie do Architekta $ightarrow$ dodanie bevelu i Slotu 1 z czarnym rantem PBR w siatce | Wyrazisty kontur 3D działający sprzętowo bez spadku klatek |
+| **Kamera meczowa nie reaguje na rotację telefonu** | Poproszenie Architekta o przestawienie kamery w GLB | Zgłoszenie do Studia $ightarrow$ aktualizacja `camera.aspect` i blokada w resize event listenerze | Prawidłowa obsługa responsywności w przeglądarce |
+| **Kliknięcie bierki wroga wykonuje niedozwolony ruch** | Zgłoszenie do Architekta | Zgłoszenie do Studia $ightarrow$ poprawka warunku `if (isEnemy && !selectedPiece)` w kontrolerze Two-Step | Poprawna logika stanu gry |
+
+---
+
+### 4. Morał na 10 000 godzin Vibecodingu
+
+> [!IMPORTANT]
+> **Po 10 000 godzin vibecodingu nie stajesz się człowiekiem, który szybciej pisze prompty.**  
+> Stajesz się programistą-architektem, który **rozumie fizykę systemu**. Wiesz dokładnie, która warstwa abstrakcji odpowiada za dany problem:  
+> - Nie zmuszasz kodu aplikacji do naprawiania wad plików binarnych.  
+> - Nie zmuszasz fabryki assetów do pisania pętli zdarzeń UI.  
+> - Rozdzielasz pracę pomiędzy wyspecjalizowanych agentów, dając każdemu narzędzia dopasowane do natury problemu.  
+> 
+> Wtedy i tylko wtedy gra na 10 frakcji, z pełnym riggingiem, animowanymi egzekucjami, unikalnym UI i fotorealistyczną scenografią 3D może powstać w pojedynkę w zaledwie kilka sesji.
